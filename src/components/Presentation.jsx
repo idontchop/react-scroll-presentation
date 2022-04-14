@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
-import { createImportSpecifier } from 'typescript'
 
 const PresentationDiv = styled.div`
     contain: paint;
@@ -105,15 +104,14 @@ const Presentation = (props) => {
         }
     }, [childClones])
 
-    return ( /*<div ref={scrollRef} style={{width: "100vw", height: "100vh", overflow: "scroll"}}>*/
-            <PresentationDiv ref={presentationRef} scrollheight={scrollableHeight}>
+    return ( <PresentationDiv ref={presentationRef} scrollheight={scrollableHeight}>
                 <PresentationContext.Provider value={{
                         scroll: scrollTop, 
                         height: window.innerHeight}}>
                         {childClones}
                 </PresentationContext.Provider>
             </PresentationDiv>
-            //</div>
+
     )
 }
 
