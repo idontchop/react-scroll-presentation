@@ -39,6 +39,7 @@ export const StyleConfig: { [functionName: string]: Function} = {
             wrapperStyle['height'] = "children" + 3     // assumes 100vh
         }
 
+        console.log(y,yFullView)
         // Set Translate for slide
         if (y < yFullView) style['transform'] = 'translateX(-100%)'   // don't slide until fully in view
         else if (y > slideBy) style['transform'] = 'translateX(0%)'  // final position after fully in view

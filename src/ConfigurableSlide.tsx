@@ -132,11 +132,14 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
 
         if (wrapperRef.current && inView()) {
 
+            // problem is wrapperRef is not yet modified by styleConfig on initial load
+            // causing yFullView to always be 0
+
             let scrollDepth =   context.scroll - (wrapperRef.current.offsetTop - context.height)
             setY( (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100)
             setYFullView( // if wrapper is bigger than view, find percentage of scroll it fills view
                         // else start transitions immediately
-                context.height < wrapperRef.current.clientHeight ? 
+                context.height <= wrapperRef.current.clientHeight ? 
                 ( context.height / wrapperRef.current.clientHeight ) * 100 
                 : 0)
         }

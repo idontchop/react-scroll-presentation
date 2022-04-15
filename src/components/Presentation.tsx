@@ -28,7 +28,7 @@ const Presentation = (props: any) => {
     const childrenRefs = useRef(new Array())
     const presentationRef:any = useRef()
     const scrollRef = useRef()
-    const [scrollTop, setScrollTop] = useState(0)
+    const [scrollTop, setScrollTop] = useState(-1)
     const [scrolling, setScrolling] = useState(false)
     const [childClones, setChildClones] = useState([])
     const [childStartMap, setChildStartMap] = useState([])  // Contains the start of scroll
@@ -96,7 +96,6 @@ const Presentation = (props: any) => {
          * We should simply have to iterate over childrenRefs instead of pulling from children.
          * Not sure if this will pose a problem later.
          */
-        console.log(presentationRef)
         if (presentationRef.current?.children.length) {
             let scrollHeight = 0
             for (let i = 0; i < presentationRef.current.children.length; i++) {

@@ -17,18 +17,13 @@ export default {
 };
 
 export const HelloWorldLoaded = () => (
+    <div>
+
     <Presentation>
-        <ConfigurableSlide transition>
+        <ConfigurableSlide slideIn>
             <HelloWorld title="FirstBook" />
-            <HelloWorld title="FirstBook2">
-                2 Transition to me
-            </HelloWorld>
-            <HelloWorld title="FirstBook3">
-                3 Transition to me
-            </HelloWorld>
-            <HelloWorld title="FirstBook4">
-                4 Transition to me
-            </HelloWorld>
         </ConfigurableSlide>
     </Presentation>
+    <HelloWorldContent title="filler" />
+    </div>
 )
