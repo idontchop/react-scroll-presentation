@@ -3,7 +3,7 @@ import React from 'react';
 
 import HelloWorld from './HelloWorld'
 import HelloWorldContent from './HelloWorldContent'
-import Presentation from './components/Presentation.jsx'
+import Presentation from './components/Presentation'
 import HorizontalSlide from './components/HorizontalSlide'
 import VerticalSlide from './components/VerticalSlide'
 import HorizontalText from './components/HorizontalTest'

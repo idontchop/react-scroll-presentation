@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const PresentationDiv = styled.div`
     contain: paint;
-  
 `
 export const PresentationContext = React.createContext({scroll: 0, height: 0})
 
@@ -21,13 +20,13 @@ export const PresentationContext = React.createContext({scroll: 0, height: 0})
  * @param {*} props 
  * @returns 
  */
-const Presentation = (props) => {
+const Presentation = (props: any) => {
 
     
 
     const [scrollableHeight, setScrollableHeight] = useState(0)
     const childrenRefs = useRef(new Array())
-    const presentationRef = useRef()
+    const presentationRef:any = useRef()
     const scrollRef = useRef()
     const [scrollTop, setScrollTop] = useState(0)
     const [scrolling, setScrolling] = useState(false)
@@ -36,7 +35,7 @@ const Presentation = (props) => {
                                                             // for each child from main scroll
 
     useEffect(() => {
-        const onScroll = e => {
+        const onScroll = (e:any) => {
           //setScrollTop(scrollRef.current.scrollTop);
           //setScrolling(scrollRef.current.scrollTop > scrollTop);
           setScrollTop(window.scrollY)
@@ -55,7 +54,7 @@ const Presentation = (props) => {
         // build Child cloned array
 
         if (Array.isArray(props.children) ) {
-            setChildClones (props.children.map ( (c,i) => {
+            setChildClones (props.children.map ( (c: any,i: number) => {
                 return React.cloneElement(c, {scroll: scrollTop, ref: childrenRefs.current[i]})
             }))
         }
@@ -82,7 +81,7 @@ const Presentation = (props) => {
 
     useEffect( () => {
 
-        let startMap = []
+        let startMap:any = []
 
         /* Contribution requested:
          * Hack applied to get the refs on the children after cloned. Putting them in cloneelement
@@ -104,7 +103,8 @@ const Presentation = (props) => {
         }
     }, [childClones])
 
-    return ( <PresentationDiv ref={presentationRef} scrollheight={scrollableHeight}>
+    console.log("Presentation")
+    return ( <PresentationDiv ref={presentationRef}>
                 <PresentationContext.Provider value={{
                         scroll: scrollTop, 
                         height: window.innerHeight}}>
