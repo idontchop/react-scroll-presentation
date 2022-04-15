@@ -52,11 +52,16 @@ const Presentation = (props: any) => {
     useEffect( () => {
 
         // build Child cloned array
-
+        console.log(props.children)
         if (Array.isArray(props.children) ) {
             setChildClones (props.children.map ( (c: any,i: number) => {
                 return React.cloneElement(c, {scroll: scrollTop, ref: childrenRefs.current[i]})
             }))
+        } else if (props.children) {
+            let c: any = [React.cloneElement(props.children, {scroll: scrollTop, ref: childrenRefs.current[0]})]
+            setChildClones(c)
+        } else {
+            // do nothing: undefined, no children
         }
 
     },[props])
@@ -91,6 +96,7 @@ const Presentation = (props: any) => {
          * We should simply have to iterate over childrenRefs instead of pulling from children.
          * Not sure if this will pose a problem later.
          */
+        console.log(presentationRef)
         if (presentationRef.current?.children.length) {
             let scrollHeight = 0
             for (let i = 0; i < presentationRef.current.children.length; i++) {
@@ -103,7 +109,6 @@ const Presentation = (props: any) => {
         }
     }, [childClones])
 
-    console.log("Presentation")
     return ( <PresentationDiv ref={presentationRef}>
                 <PresentationContext.Provider value={{
                         scroll: scrollTop, 
