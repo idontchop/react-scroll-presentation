@@ -13,7 +13,8 @@ export default [
         output: [
             {
                 file: packageJson.main,
-                format: "cjs"
+                format: "cjs",
+                sourcemap: true
             },
             {
                 file: packageJson.module,
