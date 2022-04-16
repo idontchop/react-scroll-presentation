@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react'
 import Slide from './components/Slide.type'
 import {PresentationContext} from './components/Presentation'
-import {StyleConfig, StyleKeys, WrapperKeys} from './lib/StyleConfig'
+import { StyleKeys, WrapperKeys} from './lib/style.types'
+import {StyleConfig} from './lib/StyleConfig'
 import {ChildrenConfig} from './lib/ChildrenConfig'
 
 interface ConfigureableSlideProps {
@@ -9,10 +10,20 @@ interface ConfigureableSlideProps {
     slideIn?: any,
     slideMe?: Slide,
     transition?: any,
+    alternateSlideIn?: any,
+    fadeOut?: any,
+    startScroll?: number,
     testOverWrite?: {}
 
 }
 
+
+/**
+ * Slides:
+ * 
+ *  1) Appear and fade out - For welcome screen. Will show full screen and fade out when
+ * scrolled through. 
+ */
 const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
 
     // inner class, has most transition elements
@@ -80,7 +91,6 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
 
         let propKeys = Object.keys(props).filter( e => Object.keys(StyleConfig).includes(e))
         
-        
         let result = StyleConfig['empty']()
         if (propKeys.length > 0) {
             result = propKeys.map( method => {
@@ -130,18 +140,30 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
      */
     useEffect( () => {
 
-        if (wrapperRef.current && inView()) {
+        if (wrapperRef.current && inView() && typeof props.startScroll !== "undefined") {
 
             // problem is wrapperRef is not yet modified by styleConfig on initial load
             // causing yFullView to always be 0
 
             let scrollDepth =   context.scroll - (wrapperRef.current.offsetTop - context.height)
-            setY( (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100)
+            console.log(scrollDepth, [((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100,( context.height / wrapperRef.current.scrollHeight ) * 100 ],
+            (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100,context.scroll, props.startScroll,wrapperRef.current.scrollHeight)
+            //setY( (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100)
+            if (typeof props.startScroll !== "undefined") {
+                setY( ((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100)
+            } else {
+                // start of scroll
+                setY(0)
+            }
+            // full view usually at 0. only when start, this formula still holds the start of Y in negative
+            // And will also hold when the end is clipped
+            // when clientHeight is less than viewport, can be
             setYFullView( // if wrapper is bigger than view, find percentage of scroll it fills view
                         // else start transitions immediately
-                context.height <= wrapperRef.current.clientHeight ? 
-                ( context.height / wrapperRef.current.clientHeight ) * 100 
+                context.height <= wrapperRef.current.scrollHeight ? 
+                ( context.height / wrapperRef.current.scrollHeight ) * 100  
                 : 0)
+
         }
         
     },[context.scroll,context.height])
@@ -171,6 +193,11 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
 
     },[y,yFullView])
 
+
+    /*
+    Finished adding startMap to each child of a presentation.
+    This will help to set the Y coords, so we can make a slide
+    be sticky in presentation */
 
     return <div ref={wrapperRef} style={wrapperStyle}>
         <div ref={ref} style={divStyle}>

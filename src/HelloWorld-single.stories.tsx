@@ -9,6 +9,7 @@ import VerticalSlide from './components/VerticalSlide'
 import HorizontalText from './components/HorizontalTest'
 import Header from './components/Header'
 import ConfigurableSlide from './ConfigurableSlide'
+import styled from 'styled-components';
 
 export default {
     title: 'Hello World Single',
@@ -16,14 +17,39 @@ export default {
 
 };
 
+const StyledPresentation = styled(Presentation)`
+    height: 100vh;
+
+    &::-webkit-scrollbar {
+        width: 9px;
+    }
+      
+    &::-webkit-scrollbar-track {
+      background: grey;
+      border-radius: 5px;
+    }
+      
+    &::-webkit-scrollbar-thumb {
+      background-color: lightblue; 
+      border-radius: 20px;
+      border: 1px solid grey;
+    }
+`
+
 export const HelloWorldLoaded = () => (
     <div>
-
-    <Presentation>
-        <ConfigurableSlide slideIn>
-            <HelloWorld title="FirstBook" />
-        </ConfigurableSlide>
-    </Presentation>
-    <HelloWorldContent title="filler" />
+        <StyledPresentation>
+            <ConfigurableSlide fadeOut>
+                <HelloWorld title="FirstBook" />
+            </ConfigurableSlide>
+            <ConfigurableSlide slideIn>
+                <HelloWorld title="SecondBook" />
+            </ConfigurableSlide>
+            <ConfigurableSlide fadeOut>
+                <HelloWorld title="Third Hello">
+                    Third Book Hello
+                </HelloWorld>
+            </ConfigurableSlide>
+        </StyledPresentation>
     </div>
 )

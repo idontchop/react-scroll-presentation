@@ -12,9 +12,7 @@ import Slide from './Slide.type'
  */
 const HorizontalSlide = ( props: Slide ) => {
 
-    return <ConfigurableSlide slideIn={{}}>
-        {props.children}
-    </ConfigurableSlide>
+    return <ConfigurableSlide slideIn={{}} {...props} />
 
 }
 

@@ -13,9 +13,7 @@ import ConfigurableSlide from '../ConfigurableSlide'
  */
 const VerticalSlide = ( props: Slide ) => {
 
-   return <ConfigurableSlide>
-       {props.children}
-   </ConfigurableSlide>
+   return <ConfigurableSlide {...props} />
 
 }
 

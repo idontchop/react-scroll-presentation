@@ -17,19 +17,22 @@ export default {
 };
 
 export const HelloWorldLoaded = () => (
-    <Presentation>
+    <Presentation fullScreen>
         <HorizontalSlide slideIn >
             <HelloWorld title="Storybook1" />
         </HorizontalSlide>
-        <ConfigurableSlide transition>
-            <HelloWorld title="FirstBook" />
-            <HelloWorld title="FirstBook2">
+        <ConfigurableSlide fadeOut>
+            <HelloWorld title="FadeOut" />
+        </ConfigurableSlide>
+        <ConfigurableSlide alternateSlideIn>
+            <HelloWorld small title="FirstBook" />
+            <HelloWorld small title="FirstBook2">
                 2 Transition to me
             </HelloWorld>
-            <HelloWorld title="FirstBook3">
+            <HelloWorld small title="FirstBook3">
                 3 Transition to me
             </HelloWorld>
-            <HelloWorld title="FirstBook4">
+            <HelloWorld small title="FirstBook4">
                 4 Transition to me
             </HelloWorld>
         </ConfigurableSlide>
@@ -37,7 +40,7 @@ export const HelloWorldLoaded = () => (
         <HorizontalSlide >
             <HelloWorld title="Storybook1" />
         </HorizontalSlide>
-        <ConfigurableSlide slideIn transition>
+        <ConfigurableSlide transition>
             <HelloWorld title="FirstBook" />
             <HelloWorld title="FirstBook2">
                 2 Transition to me
@@ -67,6 +70,9 @@ export const HelloWorldLoaded = () => (
         <VerticalSlide>
             <HelloWorldContent title="Next Storybook" />
         </VerticalSlide>
+        <ConfigurableSlide fadeOut>
+            <HelloWorld title="FadeOut" />
+        </ConfigurableSlide>
       
     </Presentation>
 )

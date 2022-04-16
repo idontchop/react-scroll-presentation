@@ -6,7 +6,7 @@ import React, {useState, useEffect, useRef } from "react"
  * @param props 
  * @returns 
  */
-const HW = (props: { title: string, children?: JSX.Element | JSX.Element[] | string }) => {
+const HW = (props: { small?: boolean, title: string, children?: JSX.Element | JSX.Element[] | string }) => {
 
     const bigHelloWorld = useRef<HTMLDivElement>(null)
 
@@ -21,10 +21,10 @@ const HW = (props: { title: string, children?: JSX.Element | JSX.Element[] | str
         }
     },[])
     
-    return <div style={{height: '100vh', display: "flex", flexDirection: "column", justifyContent: "center"}}>
+    return <div style={{height: props.small ? '100px' : '100vh', display: "flex", flexDirection: "column", justifyContent: "center"}}>
 
             <p>{props.title}</p>
-            <p ref={bigHelloWorld} style={{textAlign: "center", fontSize: '5em', margin: "auto"}}>
+            <p ref={bigHelloWorld} style={{textAlign: "center", fontSize: props.small ? '1em' : '5em', margin: "auto"}}>
                 {props.children ? props.children : "Hello World, react-scroll-presentation"}
                 </p>
 

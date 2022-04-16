@@ -1,31 +1,4 @@
-
-interface StyleKeys  {
-    transform?: string,
-    right?: string,
-    left?: string,
-    position?: string,
-    top?: number,
-    overflow?: string,
-    width?: string,
-    border?: string,
-    opacity?: string
-}
-// todo: DRY interfaces
-interface WrapperKeys {
-    height?: string,
-    position?: string,
-    border?: string
-}
-
-interface Params {
-    [key: string]: any,
-    numChildren: number,
-    scrollViewPort?: boolean,  // true to adust scrollable area by viewport
-    scrollSpeed?: number,      // How much to mulitply scrollable area, default 1
-    toEnd?: boolean,           // transition should last to end of scroll
-    toEndLastChild?: boolean,  // TODO last child should not transition away (scroll out instead)
-    transitionSpeed?: number   // seconds to transition (injected to css transition)
-}
+import { WrapperKeys, StyleKeys, Params } from "./style.types"
 
 const defaultParams: Params = {
     numChildren: 1,
@@ -52,11 +25,11 @@ const findScrolls =
     let childScrollLength = (100-yFullView- (stretch ? 0 : yFullView))/numChildren
 
     // Find which child has it's turn in the scroll
-    let activeChild = y < yFullView ? -1 :
-        y > yFullViewExit && !stretch ? numChildren+1 : Math.floor((y - yFullView)/childScrollLength)
+    let activeChild = y < 0 ? -1 :
+        y > yFullViewExit && !stretch ? numChildren+1 : Math.floor(y/childScrollLength)
     
     // Find precentage the child has scrolled (within its scrol length)
-    let activeChildScroll = y < yFullView ? 0 :
+    let activeChildScroll = y < 0 ? 0 :
         y > yFullViewExit && !stretch ? 0 : 
         (((y - yFullView) % childScrollLength) / childScrollLength) * 100
 
@@ -125,6 +98,56 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
             `context${params.scrollSpeed}` : `children${params.scrollSpeed}`
 
         return [{height: scrollHeight, border: "1px yellow solid", position: "relative"},
+            {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
+            childCSS]
+    },
+        /**
+     * Returns set of CSS to transition children based on the percentage
+     * of scroll and the number of children.
+     * 
+     * By passing percentages, y and yFullView keep the amount of scroll
+     * to transition a function of the component which can be simply the
+     * height of the div
+     */
+    alternateSlideIn (y: number, yFullView: number, params?: Params ):
+        [WrapperKeys,StyleKeys,StyleKeys[]] {
+
+        let yFullViewExit = 100-yFullView > yFullView ? 100-yFullView : yFullView
+
+        if ( typeof params === 'undefined' || !params.numChildren) {
+            return [{},{},[]]
+        } else {
+            //params = {...defaultParams, ...params}
+            Object.keys(defaultParams)
+                .forEach( (key) => {
+                if (!params.hasOwnProperty(key)) {
+                    params[key] = defaultParams[key]
+                }
+            })
+        }
+
+        // TODO: do we need all this info?
+        let [childScrollLength, activeChild, activeChildScroll] = 
+            findScrolls(y,yFullView,yFullViewExit,params.numChildren,params.toEnd)
+
+        // Build children css:
+        let childCSS = new Array(params.numChildren).fill({}).map( (e,i) => {
+            let css:any = {top: 0, 
+                right: "50%",
+                transition: `transform ${params.transitionSpeed ? params.transitionSpeed : 1}s`}
+
+            if (i >= activeChild) {
+                css['transform'] = `translateX(-100%)`
+            }
+
+            return css
+        })
+
+        // handles scroll speed
+        let scrollHeight = params.scrollViewPort ? 
+            `context${params.scrollSpeed}` : `children${params.scrollSpeed}`
+
+        return [{height: 'context5', border: "1px yellow solid", position: "relative"},
             {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
             childCSS]
     }
