@@ -132,6 +132,10 @@ const Presentation = (props: any) => {
         }
     }, [childClones,scrollTop])
 
+    useEffect( () => {
+        console.log("DEVELOPMENT: ", "react-scroll-presentation")
+    },[])
+
     if (props.fullScreen) {
         // fullScreen from props makes Presentation function as if full screen in view port
         return ( <PresentationDiv fullScreen ref={presentationRef}>
