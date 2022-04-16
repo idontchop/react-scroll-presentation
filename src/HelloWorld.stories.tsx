@@ -18,12 +18,13 @@ export default {
 
 export const HelloWorldLoaded = () => (
     <Presentation fullScreen>
-        <HorizontalSlide slideIn >
-            <HelloWorld title="Storybook1" />
-        </HorizontalSlide>
+
         <ConfigurableSlide fadeOut>
             <HelloWorld title="FadeOut" />
         </ConfigurableSlide>
+        <HorizontalSlide slideIn >
+            <HelloWorld title="Storybook1" />
+        </HorizontalSlide>
         <ConfigurableSlide alternateSlideIn>
             <HelloWorld small title="FirstBook" />
             <HelloWorld small title="FirstBook2">

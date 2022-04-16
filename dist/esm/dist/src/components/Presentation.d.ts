@@ -1,6 +1,7 @@
 import React from 'react';
 export declare const PresentationContext: React.Context<{
     scroll: number;
+    scrollHeight: number;
     height: number;
 }>;
 /**
