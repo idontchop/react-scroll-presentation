@@ -19,7 +19,7 @@ export default {
 };
 
 const StyledPresentation = styled(Presentation)`
-    height: 100vh;
+    height: 50vh;
 
     &::-webkit-scrollbar {
         width: 9px;
@@ -40,8 +40,6 @@ const StyledPresentation = styled(Presentation)`
 export const HelloWorldLoaded = () => {
 
     const context = React.useContext(PresentationContext)
-
-
 
     return (
     <div>

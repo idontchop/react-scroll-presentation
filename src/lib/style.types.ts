@@ -16,7 +16,8 @@ export interface StyleKeys  {
     width?: string,
     border?: string,
     opacity?: string,
-    height?: string
+    height?: string,
+    zIndex?: number | string
 }
 
 export interface WrapperKeys {

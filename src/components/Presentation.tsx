@@ -6,7 +6,8 @@ const PresentationDiv = styled.div<{fullScreen?: boolean}>`
 `
 
 const ScrollDiv = styled.div`
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 `
 export const PresentationContext = React.createContext({current: "",
      scroll: 0, scrollHeight: 0, height: 0, setScrollToSlide: (n:number|string)=>{n} })

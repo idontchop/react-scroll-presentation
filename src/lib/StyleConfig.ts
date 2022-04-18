@@ -44,13 +44,14 @@ export const StyleConfig: { [functionName: string]: Function} = {
         let wrapperStyle: WrapperKeys = {height: height, position: "sticky", top: 0, border: "2px solid green"}
         let style: StyleKeys = {width: "100%", position: "absolute", border: "1px solid yellow"}
 
-        let slideBy = yFullView
+        let slideBy = yFullView/5
 
         console.log("y:", y, "yFullView:", yFullView)
         if (y > 100) {
+            style['zIndex'] = '-9999'
             style['opacity'] = "0"
         } else if (y > slideBy) {
-            style['opacity'] = `${ (slideBy-(y-slideBy)) / (100-slideBy)}`
+            style['opacity'] = `${ ((100-slideBy) - (y-slideBy)) / (100-slideBy)}`
         }
 
         return [wrapperStyle,style]
