@@ -31,3 +31,8 @@ export interface Params {
     toEndLastChild?: boolean;
     transitionSpeed?: number;
 }
+export interface StyleParams {
+    [key: string]: any;
+    hold?: number;
+    slideBy?: number;
+}

@@ -46,9 +46,10 @@ const Presentation = (props: any) => {
             index;
 
         let scrollToOptions = {left: 0, top: childStartMap[index],
-             behavior: 'smooth'}
+             behavior: "auto"}
         if (props.fullScreen) {
-            window.scrollTo(scrollToOptions)  // wtf
+            //window.scrollTo(scrollToOptions)  // wtf
+            window.scrollTo(0, childStartMap[index])
         } else {
             scrollRef.current.scrollTo(scrollToOptions)
         }

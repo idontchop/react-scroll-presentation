@@ -6,8 +6,10 @@ interface ConfigureableSlideProps {
     slideMe?: Slide;
     transition?: any;
     alternateSlideIn?: any;
+    revealSlideIn?: any;
     fadeOut?: any;
     startScroll?: number;
+    title?: string;
     testOverWrite?: {};
 }
 /**

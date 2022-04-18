@@ -7,7 +7,7 @@
  */
 declare const HW: (props: {
     small?: boolean;
-    title: string;
+    title?: string;
     children?: JSX.Element | JSX.Element[] | string;
 }) => JSX.Element;
 export default HW;

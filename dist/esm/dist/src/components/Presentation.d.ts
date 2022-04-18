@@ -1,8 +1,10 @@
 import React from 'react';
 export declare const PresentationContext: React.Context<{
+    current: string;
     scroll: number;
     scrollHeight: number;
     height: number;
+    setScrollToSlide: (n: number | string) => void;
 }>;
 /**
  * Options to program in:
