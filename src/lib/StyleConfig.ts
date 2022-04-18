@@ -5,14 +5,14 @@ const defaultParams: StyleParams = {
     slideBy: 20
 }
 
-const getDefaults = (params: any) => {
+const getDefaults = (params: StyleParams) => {
 
-    if ( typeof params === 'undefined' ) {
+    if ( typeof params !== 'object' ) {
         params = defaultParams
     } else {
         //params = {...defaultParams, ...params}
         Object.keys(defaultParams)
-            .forEach( (key) => {
+            .forEach( (key: string) => {
             if (!params.hasOwnProperty(key)) {
                 params[key] = defaultParams[key]
             }
