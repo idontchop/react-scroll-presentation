@@ -2,6 +2,7 @@ import { WrapperKeys, StyleKeys, Params } from "./style.types"
 
 const defaultParams: Params = {
     numChildren: 1,
+    scrollViewPort: false,
     scrollSpeed: 1
 }
 
@@ -36,6 +37,31 @@ const findScrolls =
     return [childScrollLength, activeChild, activeChildScroll]
 }
 
+// handles scroll speed
+const findScrollHeightt = (params: any) => params.scrollViewPort ? 
+    `context${params.scrollSpeed}` : `children${params.scrollSpeed}`
+
+const getDefaults = (y: number, yFullView: number, params?: Params):
+    [ number, Params] => {
+
+    let yFullViewExit = 100-yFullView > yFullView ? 100-yFullView : yFullView
+
+    if ( typeof params === 'undefined' || !params.numChildren) {
+        console.error("ERROR: ", "Children Style Method didn't receive numChildren.")
+        params = defaultParams
+    } 
+    
+    //params = {...defaultParams, ...params}
+    Object.keys(defaultParams)
+        .forEach( (key) => {
+        if (!params!.hasOwnProperty(key)) {
+            params![key] = defaultParams[key]
+        }
+    })
+
+    return [yFullViewExit, params]
+}
+
         /* Make style div have height for more space between next slide
         * no height can make the presentation tighter feeling
 
@@ -59,22 +85,12 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
      * to transition a function of the component which can be simply the
      * height of the div
      */
-    transition (y: number, yFullView: number, params?: Params ):
+    transition (y: number, yFullView: number, paramsArg?: Params ):
         [WrapperKeys,StyleKeys,StyleKeys[]] {
 
-        let yFullViewExit = 100-yFullView > yFullView ? 100-yFullView : yFullView
-
-        if ( typeof params === 'undefined' || !params.numChildren) {
-            return [{},{},[]]
-        } else {
-            //params = {...defaultParams, ...params}
-            Object.keys(defaultParams)
-                .forEach( (key) => {
-                if (!params.hasOwnProperty(key)) {
-                    params[key] = defaultParams[key]
-                }
-            })
-        }
+        // Sanitize 
+        let [yFullViewExit, params] = getDefaults
+            (y, yFullView, paramsArg)
 
         // TODO: do we need all this info?
         let [childScrollLength, activeChild, activeChildScroll] = 
@@ -93,11 +109,9 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
             return css
         })
 
-        // handles scroll speed
-        let scrollHeight = params.scrollViewPort ? 
-            `context${params.scrollSpeed}` : `children${params.scrollSpeed}`
 
-        return [{height: scrollHeight, border: "1px yellow solid", position: "relative"},
+
+        return [{height: findScrollHeightt(params), border: "1px yellow solid", position: "relative"},
             {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
             childCSS]
     },
@@ -108,48 +122,75 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
      * By passing percentages, y and yFullView keep the amount of scroll
      * to transition a function of the component which can be simply the
      * height of the div
+     * 
+     * Should use params.scrollViewPort and params.scrollSpeed if children
+     * are small and mean to fit on one screen
      */
-    alternateSlideIn (y: number, yFullView: number, params?: Params ):
+    alternateSlideIn (y: number, yFullView: number, paramsArg?: Params ):
         [WrapperKeys,StyleKeys,StyleKeys[]] {
 
-        let yFullViewExit = 100-yFullView > yFullView ? 100-yFullView : yFullView
-
-        if ( typeof params === 'undefined' || !params.numChildren) {
-            return [{},{},[]]
-        } else {
-            //params = {...defaultParams, ...params}
-            Object.keys(defaultParams)
-                .forEach( (key) => {
-                if (!params.hasOwnProperty(key)) {
-                    params[key] = defaultParams[key]
-                }
-            })
-        }
+        // Sanitize 
+        let [yFullViewExit, params] = getDefaults
+            (y, yFullView, paramsArg)
 
         // TODO: do we need all this info?
         let [childScrollLength, activeChild, activeChildScroll] = 
             findScrolls(y,yFullView,yFullViewExit,params.numChildren,params.toEnd)
 
         // Build children css:
+        // This should be configurable based on params
         let childCSS = new Array(params.numChildren).fill({}).map( (e,i) => {
             let css:any = {top: 0, 
                 right: "50%",
                 transition: `transform ${params.transitionSpeed ? params.transitionSpeed : 1}s`}
 
-            if (i >= activeChild) {
+            if (i > activeChild) {
                 css['transform'] = `translateX(-100%)`
             }
 
             return css
         })
 
-        // handles scroll speed
-        let scrollHeight = params.scrollViewPort ? 
-            `context${params.scrollSpeed}` : `children${params.scrollSpeed}`
-
-        return [{height: 'context5', border: "1px yellow solid", position: "relative"},
+        return [{height: findScrollHeightt(params), border: "1px yellow solid", position: "relative"},
             {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
             childCSS]
+    },
+
+    /**
+     * Slidesin all children immediately. Doesn't increase scroll length.
+     * Good for first page or any static page that you want to reveal
+     * with animation 
+     * 
+     * Not Working: To make something like this work, need to implement
+     * a way to supply more advanced CSS to the divs. Either through
+     * selected pre-defined class or styled-components or a system
+     * similar to styled-components
+     * (https://stackoverflow.com/questions/1720320/how-to-dynamically-create-css-class-in-javascript-and-apply)
+     * 
+     * 
+     * 
+     * For users: The effect of this method can be achieved by building it into the
+     * child div itself.
+     */
+    revealSlideIn (y: number, yFullView: number, paramsArg?: Params ):
+        [WrapperKeys,StyleKeys,StyleKeys[]] {
+
+        // Sanitize 
+        let [yFullViewExit, params] = getDefaults
+            (y, yFullView, paramsArg)
+
+        let childCSS = new Array(params.numChildren).fill({}).map( (e,i) => {
+            let css:any = {
+                transform: 'translateX(-100%)'
+            }
+            if (y >= 0) {
+                css['transition'] = `transform ${1.0 + i/10}s`
+                css['transform'] = `translateX(-100%)`
+            }
+            return css
+        })
+
+        return [{height: 'context1', position: 'relative'},{position: 'sticky', overflow: 'visible', top: 0}, childCSS]        
     }
 }
 

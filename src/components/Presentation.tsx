@@ -8,7 +8,8 @@ const PresentationDiv = styled.div<{fullScreen?: boolean}>`
 const ScrollDiv = styled.div`
     overflow: scroll;
 `
-export const PresentationContext = React.createContext({scroll: 0, scrollHeight: 0, height: 0})
+export const PresentationContext = React.createContext({current: "",
+     scroll: 0, scrollHeight: 0, height: 0, setScrollToSlide: (n:number|string)=>{n} })
 
 /**
  * Options to program in:
@@ -35,8 +36,70 @@ const Presentation = (props: any) => {
     const [childClones, setChildClones] = useState([])
     const [childStartMap, setChildStartMap] = useState([])  // Contains the start of scroll
                                                             // for each child from main scroll
+    const [currentSlide, setCurrentSlide] = useState("")    // = props.childen[x].title or x
+
+    // sets scroll depending on position in child map
+    // if out of bounds, goes to furthest possible
+    const scrollToChildMap = (index: number) => {
+        index = (index < 0) ? 0 :
+            (index >= childStartMap.length) ? childStartMap.length - 1 :
+            index;
+
+        let scrollToOptions = {left: 0, top: childStartMap[index],
+             behavior: 'smooth'}
+        if (props.fullScreen) {
+            window.scrollTo(scrollToOptions)  // wtf
+        } else {
+            scrollRef.current.scrollTo(scrollToOptions)
+        }
+    }
+
+    // calls scroll to child map after determining child to
+    // scroll to. Accepts a string corresponding to title or
+    // the index number
+    // TODO: scrolling to childStartMap may scroll to empty screen
+    // if there is a transition. Need a way to determine best scrollto
+    const setScrollToSlide = (slide: number|string) => {
+
+        if (typeof slide === 'number') {
+            
+            if(slide < 0 || slide >= childStartMap.length) {
+                console.error("setScrollToSlide received slide out of bounds",0)
+            } else {
+                scrollToChildMap(slide)
+            }
+
+        } else {
+            // looking for title of slide
+            let i = 0
+            for (; i < props.children.length; i++ ) {
+                if ( props.children[i].props?.title && 
+                    props.children[i].props.title === slide) {
+                    break;
+                }
+            }
+
+            if( i === props.children.length) {
+                console.error("setScrollToSlide received unknown title")
+            } else {
+                scrollToChildMap(i)
+            }
+
+        }
+
+    }
 
     useEffect(() => {
+
+        // set current title
+        for(let i = 0; i < childStartMap.length; i++) {
+            if(scrollTop >= childStartMap[i]) {
+                if(i === (childStartMap.length - 1) || scrollTop < childStartMap[i+1]) {
+                    setCurrentSlide(props.children[i].props.title ? 
+                        props.children[i].props.title : i)
+                }
+            }
+        }
 
         if (props.fullScreen) {
 
@@ -122,7 +185,7 @@ const Presentation = (props: any) => {
                 }
             }
             setScrollableHeight(scrollHeight)   // doesn't work because child heights can change
-            console.log(childStartMap, scrollableHeight, presentationRef.current.children.item(0).clientHeight)
+            //console.log(childStartMap, scrollableHeight, presentationRef.current.children.item(0),React.isValidElement(presentationRef.current.children.item(0)))
             setChildStartMap(prev => {
                 // only update start map if changed as it will rerender children
                 return prev.length===startMap.length &&
@@ -133,7 +196,8 @@ const Presentation = (props: any) => {
     }, [childClones,scrollTop])
 
     useEffect( () => {
-        console.log("DEVELOPMENT: ", "react-scroll-presentation")
+        console.log("DEVELOPMENT: ", "react-scroll-presentation", presentationRef.current.children)
+        console.log(props.children,React.isValidElement(props.children[0]), props.children[0].props );
     },[])
 
     if (props.fullScreen) {
@@ -141,6 +205,8 @@ const Presentation = (props: any) => {
         return ( <PresentationDiv fullScreen ref={presentationRef}>
                     <PresentationContext.Provider value={{
                             scroll: scrollTop, 
+                            setScrollToSlide: (s) => setScrollToSlide(s),
+                            current: currentSlide,
                             scrollHeight: scrollableHeight - window.innerHeight,
                             height: window.innerHeight}}>
                             {childClones}
@@ -153,6 +219,8 @@ const Presentation = (props: any) => {
             <PresentationDiv style={{height: scrollableHeight}} ref={presentationRef}>
                 <PresentationContext.Provider value={{
                         scroll: scrollTop, 
+                        setScrollToSlide: (s) => setScrollToSlide(s),
+                        current: currentSlide,
                         scrollHeight: scrollableHeight - 
                             scrollRef.current ? scrollRef.current.clientHeight : 0,
                         height: scrollRef.current ? scrollRef.current.clientHeight : 0}}>

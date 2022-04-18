@@ -1,4 +1,5 @@
 import React from 'react';
+import styled,{keyframes} from 'styled-components'
 
 
 import HelloWorld from './HelloWorld'
@@ -16,30 +17,76 @@ export default {
 
 };
 
+const slideInLeft = keyframes`
+    0% {transform: translateX(-100%);}
+    100% {transform: translateX(0%);}
+`
+const slideInRight = keyframes`
+    0% {transform: translateX(100%);}
+    100% {transform: translateX(0%);}
+`
+
+const RevealSlideIn1 = styled.div`
+    animation: ${slideInLeft} 0.8s 1;
+`
+const RevealSlideIn2 = styled.div`
+    animation: ${slideInRight} 1s 1;
+`
+const RevealSlideIn3 = styled.div`
+    animation: ${slideInLeft} 1.2s 1;
+`
+const RevealSlideIn4 = styled.div`
+    animation: ${slideInRight} 1.4s 1;
+`
+
 export const HelloWorldLoaded = () => (
     <Presentation fullScreen>
 
-        <ConfigurableSlide fadeOut>
-            <HelloWorld title="FadeOut" />
+        <ConfigurableSlide title="revealSlideIn" fadeOut>
+        <RevealSlideIn1>
+        <HelloWorld small title="FirstBook" />
+        </RevealSlideIn1>
+        <RevealSlideIn2>
+            <HelloWorld small title="FirstBook2">
+                <p style={{margin: '20px'}}>2 Transition to me</p>
+            </HelloWorld>
+        </RevealSlideIn2>
+        <RevealSlideIn3>
+            <HelloWorld small title="FirstBook3">
+                <p style={{margin: '20px'}}>3 Transition to me</p>
+            </HelloWorld>
+        </RevealSlideIn3>
+        <RevealSlideIn4>
+            <HelloWorld small title="FirstBook4">
+                 <p style={{margin: '20px'}}>4 Transition to me</p>
+            </HelloWorld>
+        </RevealSlideIn4>
         </ConfigurableSlide>
-        <HorizontalSlide slideIn >
-            <HelloWorld title="Storybook1" />
-        </HorizontalSlide>
-        <ConfigurableSlide alternateSlideIn>
+
+        <ConfigurableSlide title="Introduction" fadeOut>
+            <HelloWorld title="FadeOut">
+                <div style={{display: 'flex', justifyContent: "center", flexDirection: "column", margin: 'auto'}}>
+                <p>Hello World</p>
+                <p>react-scroll-presentation</p>
+                <p>I can do this!</p>
+                </div>
+            </HelloWorld>
+        </ConfigurableSlide>
+        <ConfigurableSlide alternateSlideIn={{scrollViewPort: true, scrollSpeed: 4}}>
             <HelloWorld small title="FirstBook" />
             <HelloWorld small title="FirstBook2">
-                2 Transition to me
+                <p style={{margin: '20px'}}>2 Transition to me</p>
             </HelloWorld>
             <HelloWorld small title="FirstBook3">
-                3 Transition to me
+                <p style={{margin: '20px'}}>3 Transition to me</p>
             </HelloWorld>
             <HelloWorld small title="FirstBook4">
-                4 Transition to me
+                 <p style={{margin: '20px'}}>4 Transition to me</p>
             </HelloWorld>
         </ConfigurableSlide>
 
-        <HorizontalSlide >
-            <HelloWorld title="Storybook1" />
+        <HorizontalSlide title="Test Context Title">
+            <HelloWorld />
         </HorizontalSlide>
         <ConfigurableSlide transition>
             <HelloWorld title="FirstBook" />

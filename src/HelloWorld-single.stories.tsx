@@ -9,6 +9,7 @@ import VerticalSlide from './components/VerticalSlide'
 import HorizontalText from './components/HorizontalTest'
 import Header from './components/Header'
 import ConfigurableSlide from './ConfigurableSlide'
+import { PresentationContext } from './components/Presentation';
 import styled from 'styled-components';
 
 export default {
@@ -36,7 +37,13 @@ const StyledPresentation = styled(Presentation)`
     }
 `
 
-export const HelloWorldLoaded = () => (
+export const HelloWorldLoaded = () => {
+
+    const context = React.useContext(PresentationContext)
+
+
+
+    return (
     <div>
         <StyledPresentation>
             <ConfigurableSlide fadeOut>
@@ -47,9 +54,10 @@ export const HelloWorldLoaded = () => (
             </ConfigurableSlide>
             <ConfigurableSlide fadeOut>
                 <HelloWorld title="Third Hello">
-                    Third Book Hello
+                    <p>Third Book Hello</p>
+
                 </HelloWorld>
             </ConfigurableSlide>
         </StyledPresentation>
-    </div>
-)
+    </div>)
+}

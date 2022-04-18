@@ -11,8 +11,10 @@ interface ConfigureableSlideProps {
     slideMe?: Slide,
     transition?: any,
     alternateSlideIn?: any,
+    revealSlideIn?: any,
     fadeOut?: any,
     startScroll?: number,
+    title?: string,
     testOverWrite?: {}
 
 }
@@ -66,6 +68,8 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
      * Two choices:
      * contextX = X * context.height
      * childrenX = X * ref.current.clientHeight
+     * 
+     * TODO: fix to support fractions
      * 
      * If parameter doesn't match one of the two, returns 100%
      * @param h string

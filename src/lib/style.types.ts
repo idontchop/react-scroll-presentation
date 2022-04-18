@@ -36,3 +36,9 @@ export interface Params {
     toEndLastChild?: boolean,  // TODO last child should not transition away (scroll out instead)
     transitionSpeed?: number   // seconds to transition (injected to css transition)
 }
+
+export interface StyleParams {
+    [key: string]: any,
+    hold?: number,
+    slideBy?: number
+}

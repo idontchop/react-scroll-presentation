@@ -1,5 +1,31 @@
-import { WrapperKeys, StyleKeys, Params } from "./style.types"
+import { WrapperKeys, StyleKeys, StyleParams } from "./style.types"
 
+const defaultParams: StyleParams = {
+    hold: 1,
+    slideBy: 20
+}
+
+const getDefaults = (params: any) => {
+
+    if ( typeof params === 'undefined' ) {
+        params = defaultParams
+    } else {
+        //params = {...defaultParams, ...params}
+        Object.keys(defaultParams)
+            .forEach( (key) => {
+            if (!params.hasOwnProperty(key)) {
+                params[key] = defaultParams[key]
+            }
+        })
+    }
+
+    return [params]
+}
+/**
+ * params options: hold, right
+ * use defaultParams?
+ * 
+ */
 export const StyleConfig: { [functionName: string]: Function} = {
     empty (): [Object: WrapperKeys, Object: StyleKeys] {
         let style: StyleKeys = {}
@@ -7,12 +33,16 @@ export const StyleConfig: { [functionName: string]: Function} = {
         return [wrapperStyle,style]
     },
     // fadeOut is designed to let the div still be visible and fading when the slide
-    // below is in view
-    fadeOut (y: number, yFullView: number, params?: Params):
+    // below is in view, params.hold = 2 (default) will finish fade when
+    // next slide is fully scroll in
+    fadeOut (y: number, yFullView: number, params?: any):
         [Object: WrapperKeys, Object: StyleKeys] {
 
-        let wrapperStyle: WrapperKeys = {height: "context2", position: "sticky", top: 0, border: "2px solid green"}
-        let style: StyleKeys = {position: "absolute", border: "1px solid yellow"}
+        params = getDefaults(params)
+
+        let height = params.hold ? `context${params.hold}` : `context1`
+        let wrapperStyle: WrapperKeys = {height: height, position: "sticky", top: 0, border: "2px solid green"}
+        let style: StyleKeys = {width: "100%", position: "absolute", border: "1px solid yellow"}
 
         let slideBy = yFullView
 
@@ -58,6 +88,9 @@ export const StyleConfig: { [functionName: string]: Function} = {
         
         return [wrapperStyle, style]
     },
+    /**
+     * Effects meant to be mix and matched taking backburner
+     */
     slideOut (y: number, yFullView: number, params?: any):
         [Object: WrapperKeys, Object: StyleKeys] {
 
