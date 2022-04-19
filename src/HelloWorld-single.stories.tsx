@@ -44,6 +44,9 @@ export const HelloWorldLoaded = () => {
     return (
     <div>
         <StyledPresentation>
+            <ConfigurableSlide header>
+                <HelloWorld title="header" />
+            </ConfigurableSlide>
             <ConfigurableSlide fadeOut>
                 <HelloWorld title="FirstBook" />
             </ConfigurableSlide>

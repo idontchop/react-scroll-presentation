@@ -41,26 +41,29 @@ const RevealSlideIn4 = styled.div`
 
 export const HelloWorldLoaded = () => (
     <Presentation fullScreen>
+        <ConfigurableSlide title="header" header>
+            <HelloWorld small title="header" />
+        </ConfigurableSlide>
 
         <ConfigurableSlide title="revealSlideIn" fadeOut>
-        <RevealSlideIn1>
-        <HelloWorld small title="FirstBook" />
-        </RevealSlideIn1>
-        <RevealSlideIn2>
-            <HelloWorld small title="FirstBook2">
-                <p style={{margin: '20px'}}>2 Transition to me</p>
-            </HelloWorld>
-        </RevealSlideIn2>
-        <RevealSlideIn3>
-            <HelloWorld small title="FirstBook3">
-                <p style={{margin: '20px'}}>3 Transition to me</p>
-            </HelloWorld>
-        </RevealSlideIn3>
-        <RevealSlideIn4>
-            <HelloWorld small title="FirstBook4">
-                 <p style={{margin: '20px'}}>4 Transition to me</p>
-            </HelloWorld>
-        </RevealSlideIn4>
+            <RevealSlideIn1>
+            <HelloWorld small title="FirstBook" />
+            </RevealSlideIn1>
+            <RevealSlideIn2>
+                <HelloWorld small title="FirstBook2">
+                    <p style={{margin: '20px'}}>2 Transition to me</p>
+                </HelloWorld>
+            </RevealSlideIn2>
+            <RevealSlideIn3>
+                <HelloWorld small title="FirstBook3">
+                    <p style={{margin: '20px'}}>3 Transition to me</p>
+                </HelloWorld>
+            </RevealSlideIn3>
+            <RevealSlideIn4>
+                <HelloWorld small title="FirstBook4">
+                    <p style={{margin: '20px'}}>4 Transition to me</p>
+                </HelloWorld>
+            </RevealSlideIn4>
         </ConfigurableSlide>
 
         <ConfigurableSlide title="Introduction" fadeOut>

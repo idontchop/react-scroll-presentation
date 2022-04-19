@@ -30,8 +30,8 @@ const HW = (props: { small?: boolean, title?: string, children?: JSX.Element | J
     },[])
     
     return <div style={{height: props.small ? '100px' : '100vh', display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                    <button onClick={() => scrollTo(0)}>Scroll to 0</button>
-                    <button onClick={() => context.setScrollToSlide(1)}>Scroll to 1</button>
+                    {/*<button onClick={() => scrollTo(0)}>Scroll to 0</button>
+                    <button onClick={() => context.setScrollToSlide(1)}>Scroll to 1</button>*/}
             <p>{props.title ? props.title :
                 context.current ? context.current : "unknown title"}</p>
             <p ref={bigHelloWorld} style={{textAlign: "center", fontSize: props.small ? '1em' : '5vw', margin: "auto"}}>
