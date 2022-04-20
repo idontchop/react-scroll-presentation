@@ -22,6 +22,8 @@ export interface WrapperKeys {
     border?: string;
     top?: number;
     overflow?: string;
+    opacity?: number;
+    zIndex?: number | string;
 }
 export interface Params {
     [key: string]: any;
@@ -31,6 +33,8 @@ export interface Params {
     toEnd?: boolean;
     toEndLastChild?: boolean;
     transitionSpeed?: number;
+    staticFirstChild?: boolean;
+    showTo?: string;
 }
 export interface StyleParams {
     [key: string]: any;
