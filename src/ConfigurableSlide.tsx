@@ -79,10 +79,16 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
         if (!h) return "100%"
         let [by,multiplier] = h.split(/(context|children)(\d)$/).filter(Boolean)
 
-        let childrenHeightSum = findChildrenHeightSum(ref)
-        return by === 'context' ? 
-            context.height ? `${context.height * parseInt(multiplier)}px` : "100%" :
-            ref.current ? `${childrenHeightSum * parseInt(multiplier)}px` : "100%"
+        if (['context','children'].includes(by)) {
+
+            let childrenHeightSum = findChildrenHeightSum(ref)
+            return by === 'context' ? 
+                context.height ? `${context.height * parseInt(multiplier)}px` : "100%" :
+                ref.current ? `${childrenHeightSum * parseInt(multiplier)}px` : "100%"
+        } else {
+            // Style must be set by helper
+            return h
+        }
     }
 
     /**
@@ -151,7 +157,7 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
             // causing yFullView to always be 0
 
             let scrollDepth =   context.scroll - (wrapperRef.current.offsetTop - context.height)
-            console.log(scrollDepth, [((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100,( context.height / wrapperRef.current.scrollHeight ) * 100 ],
+            process.env.NODE_ENV === 'development' && console.log(scrollDepth, [((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100,( context.height / wrapperRef.current.scrollHeight ) * 100 ],
             (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100,context.scroll, props.startScroll,wrapperRef.current.scrollHeight)
             //setY( (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100)
             if (typeof props.startScroll !== "undefined") {

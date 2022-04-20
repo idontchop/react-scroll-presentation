@@ -74,9 +74,9 @@ export const HelloWorldLoaded = () => (
             </RevealSlideIn4>
         </ConfigurableSlide>
         <ConfigurableSlide title="header" header>
-            <HelloWorld small title="header" />
+            <HelloWorld small title="header"> Header </HelloWorld>
         </ConfigurableSlide>
-        <ConfigurableSlide alternateSlideIn={{scrollViewPort: true, scrollSpeed: 4}}>
+        <ConfigurableSlide alternateSlideIn={{scrollViewPort: true, scrollSpeed: 4, staticFirstChild: true}}>
             <HelloWorld small title="FirstBook" />
             <HelloWorld small title="FirstBook2">
                 <p style={{margin: '20px'}}>2 Transition to me</p>

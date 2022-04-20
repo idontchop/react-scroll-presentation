@@ -46,7 +46,7 @@ export const StyleConfig: { [functionName: string]: Function} = {
 
         let slideBy = yFullView/5
 
-        console.log("y:", y, "yFullView:", yFullView)
+        process.env.NODE_ENV === 'development' && console.log("y:", y, "yFullView:", yFullView)
         if (y > 100) {
             style['zIndex'] = '-9999'
             style['opacity'] = "0"
@@ -131,7 +131,9 @@ export const StyleConfig: { [functionName: string]: Function} = {
 
             params = getDefaults(params)
 
-            let wrapperStyle: WrapperKeys = {height: "1px", position: "sticky", top: 0, border: "2px solid green"}
+            let wrapperStyle: WrapperKeys = {height: "1px", 
+                position: "sticky", top: 0, border: "2px solid green",
+                opacity: 0, zIndex: '-9999'}
             let style: StyleKeys = {width: "100%", position: "absolute", border: "1px solid yellow"}
 
             return [wrapperStyle, style]

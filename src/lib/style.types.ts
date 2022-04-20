@@ -25,7 +25,9 @@ export interface WrapperKeys {
     position?: string,
     border?: string,
     top?: number,
-    overflow?: string
+    overflow?: string,
+    opacity?: number,
+    zIndex?: number | string
 }
 
 export interface Params {
@@ -35,7 +37,9 @@ export interface Params {
     scrollSpeed?: number,      // How much to mulitply scrollable area, default 1
     toEnd?: boolean,           // transition should last to end of scroll
     toEndLastChild?: boolean,  // TODO last child should not transition away (scroll out instead)
-    transitionSpeed?: number   // seconds to transition (injected to css transition)
+    transitionSpeed?: number,   // seconds to transition (injected to css transition)
+    staticFirstChild?: boolean,  // If set, first child will not have transitions set
+    showTo?: string
 }
 
 export interface StyleParams {

@@ -28,7 +28,7 @@ const findScrolls =
     // Find which child has it's turn in the scroll
     let activeChild = y < 0 ? -1 :
         y > yFullViewExit && !stretch ? numChildren+1 : Math.floor(y/childScrollLength)
-    
+
     // Find precentage the child has scrolled (within its scrol length)
     let activeChildScroll = y < 0 ? 0 :
         y > yFullViewExit && !stretch ? 0 : 
@@ -38,7 +38,7 @@ const findScrolls =
 }
 
 // handles scroll speed
-const findScrollHeightt = (params: any) => params.scrollViewPort ? 
+const findScrollHeight = (params: any) => params.scrollViewPort ? 
     `context${params.scrollSpeed}` : `children${params.scrollSpeed}`
 
 const getDefaults = (y: number, yFullView: number, params?: Params):
@@ -111,7 +111,7 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
 
 
 
-        return [{height: findScrollHeightt(params), border: "1px yellow solid", position: "relative"},
+        return [{height: findScrollHeight(params), border: "1px yellow solid", position: "relative"},
             {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
             childCSS]
     },
@@ -137,6 +137,7 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
         let [childScrollLength, activeChild, activeChildScroll] = 
             findScrolls(y,yFullView,yFullViewExit,params.numChildren,params.toEnd)
 
+        
         // Build children css:
         // This should be configurable based on params
         let childCSS = new Array(params.numChildren).fill({}).map( (e,i) => {
@@ -148,10 +149,17 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
                 css['transform'] = `translateX(-100%)`
             }
 
+            // if static first child
+            // let child act normally
+            if (params.staticFirstChild && i===0) {
+                delete css.transform
+                delete css.transition
+            }
+
             return css
         })
 
-        return [{height: findScrollHeightt(params), border: "1px yellow solid", position: "relative"},
+        return [{height: findScrollHeight(params), border: "1px yellow solid", position: "relative"},
             {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
             childCSS]
     },
