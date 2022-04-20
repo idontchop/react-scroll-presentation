@@ -8,6 +8,7 @@ interface ConfigureableSlideProps {
     alternateSlideIn?: any;
     revealSlideIn?: any;
     fadeOut?: any;
+    header?: any;
     startScroll?: number;
     title?: string;
     testOverWrite?: {};
