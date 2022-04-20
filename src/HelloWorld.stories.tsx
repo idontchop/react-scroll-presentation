@@ -41,11 +41,19 @@ const RevealSlideIn4 = styled.div`
 
 export const HelloWorldLoaded = () => (
     <Presentation fullScreen>
-        <ConfigurableSlide title="header" header>
-            <HelloWorld small title="header" />
-        </ConfigurableSlide>
 
-        <ConfigurableSlide title="revealSlideIn" fadeOut>
+
+
+        <ConfigurableSlide title="Introduction" fadeOut>
+            <HelloWorld title="FadeOut">
+                <div style={{display: 'flex', justifyContent: "center", flexDirection: "column", margin: 'auto'}}>
+                <p>Hello World</p>
+                <p>react-scroll-presentation</p>
+                <p>I can do this!</p>
+                </div>
+            </HelloWorld>
+        </ConfigurableSlide>
+        <ConfigurableSlide title="revealSlideIn" fadeOut={{hold: 2}}>
             <RevealSlideIn1>
             <HelloWorld small title="FirstBook" />
             </RevealSlideIn1>
@@ -65,15 +73,8 @@ export const HelloWorldLoaded = () => (
                 </HelloWorld>
             </RevealSlideIn4>
         </ConfigurableSlide>
-
-        <ConfigurableSlide title="Introduction" fadeOut>
-            <HelloWorld title="FadeOut">
-                <div style={{display: 'flex', justifyContent: "center", flexDirection: "column", margin: 'auto'}}>
-                <p>Hello World</p>
-                <p>react-scroll-presentation</p>
-                <p>I can do this!</p>
-                </div>
-            </HelloWorld>
+        <ConfigurableSlide title="header" header>
+            <HelloWorld small title="header" />
         </ConfigurableSlide>
         <ConfigurableSlide alternateSlideIn={{scrollViewPort: true, scrollSpeed: 4}}>
             <HelloWorld small title="FirstBook" />
