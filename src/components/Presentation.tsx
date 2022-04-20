@@ -198,7 +198,8 @@ const Presentation = (props: any) => {
     }, [childClones,scrollTop])
 
     useEffect( () => {
-        console.log("DEVELOPMENT: ", "react-scroll-presentation", process.env.version)
+        let pjson = require('../../package.json')
+        console.log("DEVELOPMENT: ", "react-scroll-presentation", pjson.version)
         console.log(presentationRef.current.children)
         console.log(props.children,React.isValidElement(props.children[0]), props.children[0].props );
     },[])
