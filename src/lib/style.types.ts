@@ -17,7 +17,14 @@ export interface StyleKeys  {
     border?: string,
     opacity?: string,
     height?: string,
-    zIndex?: number | string
+    zIndex?: number | string,
+    backgroundImage?: string,
+    backgroundPosition?: string,
+    backgroundSize?: string,
+    backgroundRepeat?: string,
+    backgroundColor?: string,
+    backgroundBlend?: string,
+    filter?: string
 }
 
 export interface WrapperKeys {
@@ -33,6 +40,8 @@ export interface WrapperKeys {
 export interface Params {
     [key: string]: any,
     numChildren: number,
+    background?: string,
+    fullScreen?: boolean,
     scrollViewPort?: boolean,  // true to adust scrollable area by viewport
     scrollSpeed?: number,      // How much to mulitply scrollable area, default 1
     toEnd?: boolean,           // transition should last to end of scroll

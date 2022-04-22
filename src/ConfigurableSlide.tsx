@@ -212,6 +212,9 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
 
     return <div ref={wrapperRef} style={wrapperStyle}>
         <div ref={ref} style={divStyle}>
+        {props.header && <div style={{position: "sticky", top: 0, border: 0, padding: 0, margin: 0}}>
+            {props.header}
+            </div>}
         {React.Children.map(props.children, (e,i) => {
             let childStyle = i < childrenStyles.length ? childrenStyles[i] : {}
             return <div style={childStyle}>

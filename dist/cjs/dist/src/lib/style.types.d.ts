@@ -15,6 +15,13 @@ export interface StyleKeys {
     opacity?: string;
     height?: string;
     zIndex?: number | string;
+    backgroundImage?: string;
+    backgroundPosition?: string;
+    backgroundSize?: string;
+    backgroundRepeat?: string;
+    backgroundColor?: string;
+    backgroundBlend?: string;
+    filter?: string;
 }
 export interface WrapperKeys {
     height?: string;
@@ -28,6 +35,8 @@ export interface WrapperKeys {
 export interface Params {
     [key: string]: any;
     numChildren: number;
+    background?: string;
+    fullScreen?: boolean;
     scrollViewPort?: boolean;
     scrollSpeed?: number;
     toEnd?: boolean;

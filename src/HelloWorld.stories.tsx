@@ -39,6 +39,8 @@ const RevealSlideIn4 = styled.div`
     animation: ${slideInRight} 1.4s 1;
 `
 
+let header = <div style={{width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
+
 export const HelloWorldLoaded = () => (
     <Presentation fullScreen>
 
@@ -74,9 +76,12 @@ export const HelloWorldLoaded = () => (
             </RevealSlideIn4>
         </ConfigurableSlide>
         <ConfigurableSlide title="header" header>
-            <HelloWorld small title="header"> Header </HelloWorld>
+        <div style={{margin: 0, width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
         </ConfigurableSlide>
-        <ConfigurableSlide alternateSlideIn={{scrollViewPort: true, scrollSpeed: 4, staticFirstChild: true}}>
+        <ConfigurableSlide alternateSlideIn={
+                {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
+                scrollViewPort: true, scrollSpeed: 4, 
+                fullScreen: true}}>
             <HelloWorld small title="FirstBook" />
             <HelloWorld small title="FirstBook2">
                 <p style={{margin: '20px'}}>2 Transition to me</p>
@@ -92,7 +97,10 @@ export const HelloWorldLoaded = () => (
         <HorizontalSlide title="Test Context Title">
             <HelloWorld />
         </HorizontalSlide>
-        <ConfigurableSlide transition>
+        <ConfigurableSlide transition={
+                {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
+                scrollViewPort: true, scrollSpeed: 6, 
+                staticFirstChild: true, fullScreen: true}}>
             <HelloWorld title="FirstBook" />
             <HelloWorld title="FirstBook2">
                 2 Transition to me
@@ -107,9 +115,6 @@ export const HelloWorldLoaded = () => (
         <VerticalSlide>
             <HelloWorldContent title="Next Storybook" />
         </VerticalSlide>
-        <Header header={<div style={{width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>}>
-            <HelloWorldContent title="Final Storybook" />
-        </Header>
         <HorizontalText>
             <div style={{width: "100%", height: "100px", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
         </HorizontalText>

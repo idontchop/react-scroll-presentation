@@ -62,6 +62,28 @@ const getDefaults = (y: number, yFullView: number, params?: Params):
     return [yFullViewExit, params]
 }
 
+const buildStylesFromParams = (y: number, yFullView: number, params: Params) => {
+
+    let styles: StyleKeys = {}
+    if(params.background) {
+        styles.backgroundImage = `url(${params.background})`
+        styles.backgroundPosition = "center"
+        styles.backgroundSize = 'contain'
+        styles.backgroundRepeat = 'no-repeat'
+    } 
+    
+    if (params.fullScreen) {
+        styles.height = "100vh"
+        styles.width = "100%"
+
+        if (y > 0) {
+            styles.opacity = "0.8"
+        }
+    }
+
+    return styles
+}
+
         /* Make style div have height for more space between next slide
         * no height can make the presentation tighter feeling
 
@@ -109,10 +131,10 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
             return css
         })
 
-
+        let stickyStyles = buildStylesFromParams(y,yFullView,params)
 
         return [{height: findScrollHeight(params), border: "1px yellow solid", position: "relative"},
-            {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
+            {...stickyStyles, ...{position: "sticky", overflow: "visible", top: 0,border: "1px red solid"}},
             childCSS]
     },
         /**
@@ -159,8 +181,10 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
             return css
         })
 
+        let stickyStyles = buildStylesFromParams(y,yFullView,params)
+
         return [{height: findScrollHeight(params), border: "1px yellow solid", position: "relative"},
-            {position: "sticky", overflow: "visible", top: 0,border: "1px red solid"},
+            {...stickyStyles, ...{position: "sticky", overflow: "visible", top: 0,border: "1px red solid"}},
             childCSS]
     },
 
