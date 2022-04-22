@@ -70,14 +70,14 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
      * contextX = X * context.height
      * childrenX = X * ref.current.clientHeight
      * 
-     * TODO: fix to support fractions
+     * TODO: fix to support fractions, done apr 22, not tested
      * 
      * If parameter doesn't match one of the two, returns 100%
      * @param h string
      */
     const convertHeight = (h?: string) => {
         if (!h) return "100%"
-        let [by,multiplier] = h.split(/(context|children)(\d)$/).filter(Boolean)
+        let [by,multiplier] = h.split(/(context|children)(\d*\.?\d*)$/).filter(Boolean)
 
         if (['context','children'].includes(by)) {
 

@@ -79,7 +79,7 @@ export const HelloWorldLoaded = () => (
         <div style={{margin: 0, width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
         </ConfigurableSlide>
         <ConfigurableSlide alternateSlideIn={
-                {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
+                { /* test background */
                 scrollViewPort: true, scrollSpeed: 4, 
                 fullScreen: true}}>
             <HelloWorld small title="FirstBook" />
