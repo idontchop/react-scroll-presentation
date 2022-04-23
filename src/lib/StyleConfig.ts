@@ -41,8 +41,8 @@ export const StyleConfig: { [functionName: string]: Function} = {
         params = getDefaults(params)
 
         let height = params.hold ? `context${params.hold}` : `context1`
-        let wrapperStyle: WrapperKeys = {height: height, position: "sticky", top: 0, border: "2px solid green"}
-        let style: StyleKeys = {width: "100%", position: "absolute", border: "1px solid yellow"}
+        let wrapperStyle: WrapperKeys = {height: height, position: "sticky", top: 0 /*, border: "2px solid green"*/}
+        let style: StyleKeys = {width: "100%", position: "absolute" /*, border: "1px solid yellow"*/}
 
         let slideBy = yFullView/5
 
