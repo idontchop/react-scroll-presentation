@@ -131,7 +131,7 @@ export const StyleConfig: { [functionName: string]: Function} = {
 
             params = getDefaults(params)
 
-            let wrapperStyle: WrapperKeys = {height: "1px", 
+            let wrapperStyle: WrapperKeys = {zIndex: 11, height: "1px", 
                 position: "sticky", top: 0}
             let style: StyleKeys = {zIndex: 11, width: "100%", position: "absolute"}
 
