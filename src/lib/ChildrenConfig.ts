@@ -163,9 +163,10 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
         // Build children css:
         // This should be configurable based on params
         let childCSS = new Array(params.numChildren).fill({}).map( (e,i) => {
-            let css:any = {top: 0, 
-                right: "50%",
-                transition: `transform ${params.transitionSpeed ? params.transitionSpeed : 1}s`}
+            let css:any = {top: 0,
+                // not having transition when early in scroll prevents transition happening on first paint 
+                transition: y < 0 - yFullView ? `` : `transform ${params.transitionSpeed ? params.transitionSpeed : 1}s`
+            }
 
             if (i > activeChild) {
                 css['transform'] = `translateX(-100%)`
