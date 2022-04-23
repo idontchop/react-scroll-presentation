@@ -151,7 +151,9 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
      */
     useEffect( () => {
 
-        if (wrapperRef.current && inView() && typeof props.startScroll !== "undefined") {
+        // removed inView() check for now as it made transitions difficult
+        // alternative could be a 'first paint' call at start
+        if (wrapperRef.current /*&& inView()*/ && typeof props.startScroll !== "undefined") {
 
             // problem is wrapperRef is not yet modified by styleConfig on initial load
             // causing yFullView to always be 0
