@@ -2,7 +2,8 @@ import { WrapperKeys, StyleKeys, StyleParams } from "./style.types"
 
 const defaultParams: StyleParams = {
     hold: 1,
-    slideBy: 20
+    slideBy: 20,
+    direction: 'bottom'
 }
 
 const getDefaults = (params: StyleParams) => {
@@ -55,6 +56,34 @@ export const StyleConfig: { [functionName: string]: Function} = {
         }
 
         return [wrapperStyle,style]
+    },
+
+    // Slides into view once slide is visible. Creates a little bounce in effect
+    springIn (y: number, yFullView: number, params?: any):
+        [Object: WrapperKeys, Object: StyleKeys] {
+    
+        params = getDefaults(params)
+    
+        let style: StyleKeys = {position: "sticky", 
+            transition: `transform ${params.transitionSpeed ? params.transitionSpeed : 1}s ease,
+                opacity ${params.transitionSpeed ? params.transitionSpeed : 1}s ease`,
+            top: 0, overflow: "hidden", width: "100%"}
+        let wrapperStyle: WrapperKeys = {}
+
+        let slideBy = 0 - yFullView // we want it to slide in right away.
+
+        if (y < slideBy + yFullView/3 ) {
+            // not visible yet
+            style['transform'] = (params.direction === 'right') ? 'translateX(15%)' :
+                (params.direction === 'left') ? 'translateX(-15%)' :
+                'translateY(15%)'
+            style['opacity'] = '0.1'
+        } else {
+            // nothing
+            style['opacity'] = '1'
+        }
+
+        return [wrapperStyle, style]
     },
     slideIn (y: number ,yFullView: number ,params?: any ):
         [Object: WrapperKeys, Object: StyleKeys] {

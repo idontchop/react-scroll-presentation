@@ -1,3 +1,8 @@
+export const defaultParams: Params = {
+    numChildren: 1,
+    scrollViewPort: false,
+    scrollSpeed: 1
+}
 
 export default interface SlideStyle {
     right?: boolean,
@@ -24,7 +29,8 @@ export interface StyleKeys  {
     backgroundRepeat?: string,
     backgroundColor?: string,
     backgroundBlend?: string,
-    filter?: string
+    filter?: string,
+    transition?: string
 }
 
 export interface WrapperKeys {
@@ -54,5 +60,6 @@ export interface Params {
 export interface StyleParams {
     [key: string]: any,
     hold?: number,
-    slideBy?: number
+    slideBy?: number,
+    direction?: string
 }

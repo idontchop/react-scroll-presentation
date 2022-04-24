@@ -16,7 +16,8 @@ interface ConfigureableSlideProps {
     header?: any,
     startScroll?: number,
     title?: string,
-    testOverWrite?: {}
+    testOverWrite?: {},
+    springIn?: any
 
 }
 

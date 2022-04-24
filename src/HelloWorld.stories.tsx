@@ -55,6 +55,9 @@ export const HelloWorldLoaded = () => (
                 </div>
             </HelloWorld>
         </ConfigurableSlide>
+        <ConfigurableSlide springIn>
+            <HelloWorldContent title="content" />
+        </ConfigurableSlide>
         <ConfigurableSlide title="revealSlideIn" fadeOut={{hold: 2}}>
             <RevealSlideIn1>
             <HelloWorld small title="FirstBook" />

@@ -1,10 +1,6 @@
-import { WrapperKeys, StyleKeys, Params } from "./style.types"
+import { WrapperKeys, StyleKeys, Params, defaultParams } from "./style.types"
 
-const defaultParams: Params = {
-    numChildren: 1,
-    scrollViewPort: false,
-    scrollSpeed: 1
-}
+
 
 /**
  * Helper method, determines scroll length for each child and 

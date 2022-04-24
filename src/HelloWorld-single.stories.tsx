@@ -37,6 +37,10 @@ const StyledPresentation = styled(Presentation)`
     }
 `
 
+/**
+ * scroll in div broken. height recalculates
+ * @returns 
+ */
 export const HelloWorldLoaded = () => {
 
     const context = React.useContext(PresentationContext)
@@ -44,6 +48,12 @@ export const HelloWorldLoaded = () => {
     return (
     <div>
         <StyledPresentation>
+            <ConfigurableSlide slideIn>
+                <HelloWorldContent title="content" />
+            </ConfigurableSlide>
+            <ConfigurableSlide springIn>
+                <HelloWorld />
+            </ConfigurableSlide>
             <ConfigurableSlide header>
                 <HelloWorld title="header" />
             </ConfigurableSlide>

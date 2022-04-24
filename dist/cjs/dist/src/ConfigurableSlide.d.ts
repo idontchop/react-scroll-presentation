@@ -12,6 +12,7 @@ interface ConfigureableSlideProps {
     startScroll?: number;
     title?: string;
     testOverWrite?: {};
+    springIn?: any;
 }
 /**
  * Slides:

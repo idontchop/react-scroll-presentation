@@ -1,3 +1,4 @@
+export declare const defaultParams: Params;
 export default interface SlideStyle {
     right?: boolean;
     left?: boolean;
@@ -22,6 +23,7 @@ export interface StyleKeys {
     backgroundColor?: string;
     backgroundBlend?: string;
     filter?: string;
+    transition?: string;
 }
 export interface WrapperKeys {
     height?: string;
@@ -49,4 +51,5 @@ export interface StyleParams {
     [key: string]: any;
     hold?: number;
     slideBy?: number;
+    direction?: string;
 }
