@@ -185,7 +185,7 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
         let stickyStyles = buildStylesFromParams(y,yFullView,params)
 
         return [{height: findScrollHeight(params) , position: "relative" /*, border: "1px yellow solid"*/},
-            {...stickyStyles, ...{position: "sticky", overflow: "visible", top: 0 /*,border: "1px red solid"*/}},
+            {...stickyStyles, ...{position: "sticky", WebKitPosition: "sticky", overflow: "visible", top: 0 /*,border: "1px red solid"*/}},
             childCSS]
     },
 
