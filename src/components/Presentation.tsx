@@ -41,7 +41,8 @@ const Presentation = (props: any) => {
 
     // sets scroll depending on position in child map
     // if out of bounds, goes to furthest possible
-    const scrollToChildMap = (index: number) => {
+    // include addTo for scrolling additional (necessary to land after transition)
+    const scrollToChildMap = (index: number, addTo?: number) => {
         index = (index < 0) ? 0 :
             (index >= childStartMap.length) ? childStartMap.length - 1 :
             index;
@@ -50,6 +51,7 @@ const Presentation = (props: any) => {
              behavior: "auto"}
         if (props.fullScreen) {
             //window.scrollTo(scrollToOptions)  // wtf
+            // TODO: Does this work if presentation isn't start?
             window.scrollTo(0, childStartMap[index])
         } else {
             scrollRef.current.scrollTo(scrollToOptions)
@@ -61,14 +63,17 @@ const Presentation = (props: any) => {
     // the index number
     // TODO: scrolling to childStartMap may scroll to empty screen
     // if there is a transition. Need a way to determine best scrollto
-    const setScrollToSlide = (slide: number|string) => {
+    //      Added plusContext for now. Adding a 1 will scroll it + window.height
+    //      This isn't good enough.
+    const setScrollToSlide = (slide: number|string, plusContext?: number) => {
 
         if (typeof slide === 'number') {
             
             if(slide < 0 || slide >= childStartMap.length) {
                 console.error("setScrollToSlide received slide out of bounds",0)
             } else {
-                scrollToChildMap(slide)
+                if (plusContext) scrollToChildMap(slide, window.innerHeight*plusContext)
+                else scrollToChildMap(slide)
             }
 
         } else {
@@ -84,7 +89,8 @@ const Presentation = (props: any) => {
             if( i === props.children.length) {
                 console.error("setScrollToSlide received unknown title")
             } else {
-                scrollToChildMap(i)
+                if (plusContext) scrollToChildMap(i, window.innerHeight*plusContext)
+                else scrollToChildMap(i)
             }
 
         }
