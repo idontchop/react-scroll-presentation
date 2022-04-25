@@ -181,7 +181,7 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
         let stickyStyles = buildStylesFromParams(y,yFullView,params)
 
         // TODO: need full browser position: sticky, why isn't WebKitPosition working?
-        return [{height: findScrollHeight(params) , display: 'block', position: "relative" /*, border: "1px yellow solid"*/},
+        return [{height: findScrollHeight(params) , overflow: 'visible', display: 'block', position: "relative" /*, border: "1px yellow solid"*/},
             {...stickyStyles, ...{WebkitPosition: "sticky", position: "sticky", overflow: "visible", top: 0 /*,border: "1px red solid"*/}},
             childCSS]
     },
