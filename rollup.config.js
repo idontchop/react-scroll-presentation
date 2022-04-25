@@ -29,7 +29,7 @@ export default [
             commonjs( {include: /node__modules/ }),
             typescript({ tsconfig: "./tsconfig.json" }),
             terser(),
-            css()
+            css({alwaysOutput: true})
         ],
         external: ["react", "react-dom", "styled-components"]
     } 
