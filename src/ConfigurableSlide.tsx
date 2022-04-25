@@ -4,6 +4,9 @@ import {PresentationContext} from './components/Presentation'
 import { StyleKeys, WrapperKeys} from './lib/style.types'
 import {StyleConfig} from './lib/StyleConfig'
 import {ChildrenConfig} from './lib/ChildrenConfig'
+import styled from 'styled-components'
+import {WithVendorSpecific} from './lib/WithVendorSpecific'
+import './App.css'
 
 interface ConfigureableSlideProps {
     children?: JSX.Element | JSX.Element[] ,
@@ -20,6 +23,8 @@ interface ConfigureableSlideProps {
     springIn?: any
 
 }
+
+
 
 
 /**
@@ -91,6 +96,7 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
             return h
         }
     }
+
 
     /**
      * Builds wrapperStyles and divStyles based on the order of the props
@@ -214,17 +220,18 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
     be sticky in presentation */
 
     return <div ref={wrapperRef} style={wrapperStyle}>
-        <div ref={ref} style={divStyle}>
-        {props.header && <div style={{position: "sticky", top: 0, border: 0, padding: 0, margin: 0}}>
-            {props.header}
-            </div>}
-        {React.Children.map(props.children, (e,i) => {
-            let childStyle = i < childrenStyles.length ? childrenStyles[i] : {}
-            return <div style={childStyle}>
-                {typeof e !== 'undefined' ? React.cloneElement(e) : undefined}
-                </div>
-        })}
-    </div></div>
+            {WithVendorSpecific(<div ref={ref} style={divStyle}>
+            {props.header && <div style={{position: "sticky", top: 0, border: 0, padding: 0, margin: 0}}>
+                {props.header}
+                </div>}
+            {React.Children.map(props.children, (e,i) => {
+                let childStyle = i < childrenStyles.length ? childrenStyles[i] : {}
+                return <div style={childStyle}>
+                    {typeof e !== 'undefined' ? React.cloneElement(e) : undefined}
+                    </div>
+            })}
+        </div>)}
+    </div>
 
 }
 

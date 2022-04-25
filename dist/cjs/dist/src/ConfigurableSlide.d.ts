@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import Slide from './components/Slide.type';
+import './App.css';
 interface ConfigureableSlideProps {
     children?: JSX.Element | JSX.Element[];
     slideIn?: any;
