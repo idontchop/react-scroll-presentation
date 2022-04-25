@@ -40,7 +40,8 @@ export interface WrapperKeys {
     top?: number,
     overflow?: string,
     opacity?: number,
-    zIndex?: number | string
+    zIndex?: number | string,
+    display?: string
 }
 
 export interface Params {

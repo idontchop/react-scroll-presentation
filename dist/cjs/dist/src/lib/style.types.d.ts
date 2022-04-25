@@ -33,6 +33,7 @@ export interface WrapperKeys {
     overflow?: string;
     opacity?: number;
     zIndex?: number | string;
+    display?: string;
 }
 export interface Params {
     [key: string]: any;
