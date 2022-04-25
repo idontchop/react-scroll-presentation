@@ -1,4 +1,4 @@
-import React from "react";
+/// <reference types="react" />
 /**
  * HOC that takes a single element, analyzes the styles and adds classes
  * to replace some styles.
@@ -10,4 +10,4 @@ import React from "react";
  *
  * @param Element JSX.Element
  */
-export declare const WithVendorSpecific: (Element: JSX.Element) => React.FunctionComponentElement<any>;
+export declare const WithVendorSpecific: (Element: JSX.Element) => JSX.Element;

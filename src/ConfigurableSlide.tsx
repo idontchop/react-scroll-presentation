@@ -6,7 +6,6 @@ import {StyleConfig} from './lib/StyleConfig'
 import {ChildrenConfig} from './lib/ChildrenConfig'
 import styled from 'styled-components'
 import {WithVendorSpecific} from './lib/WithVendorSpecific'
-import './App.css'
 
 interface ConfigureableSlideProps {
     children?: JSX.Element | JSX.Element[] ,
