@@ -14,7 +14,8 @@ export const PresentationContext = React.createContext({current: "",
 
 const stickyCSS = `    
      .sticky {
-         position: -webkit-sticky;
+        display: block;
+        position: -webkit-sticky;
         position: -moz-sticky;
         position: -o-sticky;
         position: -ms-sticky;
