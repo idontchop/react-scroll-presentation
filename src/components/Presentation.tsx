@@ -39,6 +39,7 @@ const stickyCSS = `
 const Presentation = (props: any) => {
 
     const [scrollableHeight, setScrollableHeight] = useState(0)
+    const [initialHeight, setInitialHeight] = useState(0)
     const childrenRefs = useRef(new Array())
     const presentationRef:any = useRef()
     const scrollRef:any = useRef()
@@ -223,6 +224,9 @@ const Presentation = (props: any) => {
         let styleSheet = document.createElement("style")
         styleSheet.innerText = stickyCSS
         document.head.appendChild(styleSheet)
+
+        // quick fix but TODO: account for aspect change
+        setInitialHeight(window.innerHeight)
     },[])
 
     if (props.fullScreen) {
@@ -232,8 +236,8 @@ const Presentation = (props: any) => {
                             scroll: scrollTop, 
                             setScrollToSlide: (s) => setScrollToSlide(s),
                             current: currentSlide,
-                            scrollHeight: scrollableHeight - window.innerHeight,
-                            height: window.innerHeight}}>
+                            scrollHeight: scrollableHeight - initialHeight,
+                            height: initialHeight}}>
                             {childClones}
                     </PresentationContext.Provider>
                 </PresentationDiv> )
