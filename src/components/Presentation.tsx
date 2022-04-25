@@ -12,6 +12,15 @@ const ScrollDiv = styled.div`
 export const PresentationContext = React.createContext({current: "",
      scroll: 0, scrollHeight: 0, height: 0, setScrollToSlide: (n:number|string)=>{n} })
 
+const stickyCSS = `    
+     .sticky {
+         position: -webkit-sticky;
+        position: -moz-sticky;
+        position: -o-sticky;
+        position: -ms-sticky;
+        position: sticky;
+     }`
+
 /**
  * Options to program in:
  * 
@@ -208,6 +217,11 @@ const Presentation = (props: any) => {
         console.log("DEVELOPMENT: ", "react-scroll-presentation", pjson.version)
         console.log(presentationRef.current.children)
         console.log(props.children,React.isValidElement(props.children[0]), props.children[0].props );
+
+        // create our CSS styles:
+        let styleSheet = document.createElement("style")
+        styleSheet.innerText = stickyCSS
+        document.head.appendChild(styleSheet)
     },[])
 
     if (props.fullScreen) {

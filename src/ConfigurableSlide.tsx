@@ -165,8 +165,8 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
             // causing yFullView to always be 0
 
             let scrollDepth =   context.scroll - (wrapperRef.current.offsetTop - context.height)
-            process.env.NODE_ENV === 'development' && console.log(scrollDepth, [((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100,( context.height / wrapperRef.current.scrollHeight ) * 100 ],
-            (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100,context.scroll, props.startScroll,wrapperRef.current.scrollHeight)
+            //process.env.NODE_ENV === 'development' && console.log(scrollDepth, [((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100,( context.height / wrapperRef.current.scrollHeight ) * 100 ],
+            //(scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100,context.scroll, props.startScroll,wrapperRef.current.scrollHeight)
             //setY( (scrollDepth / (wrapperRef.current.clientHeight + context.height)) * 100)
             if (typeof props.startScroll !== "undefined") {
                 setY( ((context.scroll-props.startScroll) / (wrapperRef.current.scrollHeight)) * 100)

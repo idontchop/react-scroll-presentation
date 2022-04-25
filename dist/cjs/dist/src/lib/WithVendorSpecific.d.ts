@@ -10,4 +10,5 @@
  *
  * @param Element JSX.Element
  */
-export declare const WithVendorSpecific: (Element: JSX.Element) => JSX.Element;
+export declare const WithVendorSpecificStyled: (Element: JSX.Element) => JSX.Element;
+export declare const WithVendorSpecific: (Element: JSX.Element) => any;
