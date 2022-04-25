@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 
 const PresentationDiv = styled.div<{fullScreen?: boolean}>`
-    contain: paint;
+    overflow: clip;
 `
 
 const ScrollDiv = styled.div`

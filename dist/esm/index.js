@@ -1,5 +1,5 @@
 import e,{useState as t,useRef as r,useEffect as n}from"react";import l from"styled-components";const i=l.div`
-    contain: paint;
+    overflow: clip;
 `,o=l.div`
     overflow-y: scroll;
     overflow-x: hidden;
