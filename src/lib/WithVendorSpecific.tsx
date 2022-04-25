@@ -29,8 +29,7 @@ export const WithVendorSpecific = (Element: JSX.Element) => {
             position: -moz-sticky;
             position: -o-sticky;
             position: -ms-sticky;
-            position: sticky;
-            border: 1px green solid;`
+            position: sticky;`
 
 
         /*let newClassNames = Element.props.className ? 'sticky ' + Element.props.className : 'sticky'
@@ -38,7 +37,6 @@ export const WithVendorSpecific = (Element: JSX.Element) => {
             style: newStyles,
             className: newClassNames
         })*/
-        console.log(Element,NewElement)
         return <NewElement />
     } else {
         return Element
