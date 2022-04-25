@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const PresentationDiv = styled.div<{fullScreen?: boolean}>`
     overflow: clip;
-    contain: paint;
 `
 
 const ScrollDiv = styled.div`
