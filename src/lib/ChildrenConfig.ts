@@ -165,7 +165,7 @@ export const ChildrenConfig: { [functionName: string]: Function} = {
             }
 
             if (i > activeChild) {
-                css['transform'] = `translateX(-100%)`
+                css['transform'] = `translate3d(-100%,0,0)`
             }
 
             // if static first child
