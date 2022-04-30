@@ -73,7 +73,8 @@ const buildStylesFromParams = (y: number, yFullView: number, params: Params) => 
         styles.width = "100%"
 
         if (y > 0) {
-            styles.opacity = "0.8"
+            // may not look good if children use opacity setting
+            //styles.opacity = "0.8"
         }
     }
 
