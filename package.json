@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-presentation",
-  "version": "1.0.31-dev",
+  "version": "1.0.32-dev",
   "description": "Configure a presentation advanced by scrolling",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
