@@ -9,7 +9,6 @@ import VerticalSlide from './components/VerticalSlide'
 import HorizontalText from './components/HorizontalTest'
 import Header from './components/Header'
 import ConfigurableSlide from './ConfigurableSlide'
-import { PresentationContext } from './components/Presentation';
 import styled from 'styled-components';
 
 export default {
@@ -43,32 +42,15 @@ const StyledPresentation = styled(Presentation)`
  */
 export const HelloWorldLoaded = () => {
 
-    const context = React.useContext(PresentationContext)
-
     return (
     <div>
         <StyledPresentation>
-            <ConfigurableSlide slideIn>
-                <HelloWorldContent title="content" />
-            </ConfigurableSlide>
             <ConfigurableSlide springIn>
-                <HelloWorld />
-            </ConfigurableSlide>
-            <ConfigurableSlide header>
-                <HelloWorld title="header" />
-            </ConfigurableSlide>
-            <ConfigurableSlide fadeOut>
-                <HelloWorld title="FirstBook" />
-            </ConfigurableSlide>
-            <ConfigurableSlide slideIn>
-                <HelloWorld title="SecondBook" />
-            </ConfigurableSlide>
-            <ConfigurableSlide fadeOut>
-                <HelloWorld title="Third Hello">
-                    <p>Third Book Hello</p>
-
-                </HelloWorld>
-            </ConfigurableSlide>
+                <HelloWorldContent title="content" />
+            </ConfigurableSlide>   
+            <ConfigurableSlide springIn>
+                <HelloWorldContent title="content" />
+            </ConfigurableSlide>                       
         </StyledPresentation>
     </div>)
 }

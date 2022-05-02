@@ -45,7 +45,7 @@ const Presentation = (props: any) => {
     const scrollRef:any = useRef()
     const [scrollTop, setScrollTop] = useState(-1)
     const [scrolling, setScrolling] = useState(false)
-    const [childClones, setChildClones] = useState([])
+    const [childClones, setChildClones] = useState<any[]>([])
     const [childStartMap, setChildStartMap] = useState([])  // Contains the start of scroll
                                                             // for each child from main scroll
     const [currentSlide, setCurrentSlide] = useState("")    // = props.childen[x].title or x
@@ -113,9 +113,9 @@ const Presentation = (props: any) => {
         // set current title
         for(let i = 0; i < childStartMap.length; i++) {
             if(scrollTop >= childStartMap[i]) {
-                if(i === (childStartMap.length - 1) || scrollTop < childStartMap[i+1]) {
-                    setCurrentSlide(props.children[i].props.title ? 
-                        props.children[i].props.title : i)
+                if(i === (childStartMap.length - 1) || scrollTop < childStartMap[i+1]) {                    
+                    setCurrentSlide(childClones[i].props?.title ?
+                        childClones[i].props.title : i)
                 }
             }
         }
@@ -218,7 +218,7 @@ const Presentation = (props: any) => {
         let pjson = require('../../package.json')
         console.log("DEVELOPMENT: ", "react-scroll-presentation", pjson.version)
         console.log(presentationRef.current.children)
-        console.log(props.children,React.isValidElement(props.children[0]), props.children[0].props );
+        console.log(props.children,React.isValidElement(props.children[0]) );
 
         // create our CSS styles:
         let styleSheet = document.createElement("style")

@@ -88,6 +88,17 @@ export const StyleConfig: { [functionName: string]: Function} = {
     slideIn (y: number ,yFullView: number ,params?: any ):
         [Object: WrapperKeys, Object: StyleKeys] {
 
+        /* @todo 
+        * To make this work, need to have wrapper div height at slide height + context.height*2
+        * (context.height*X for variable slideIn)
+        * convertHeight in Configurable slide doesn't support this yet
+        * 
+        * slideIn sounds cool... problem is that the effect only works when the wrapper
+        * is fully in view, which means empty scrolling
+        * 
+        * The effect will probably work better as children that slide through
+        */
+
         if ( typeof params === 'undefined') {
             params = {}
         }
@@ -95,11 +106,11 @@ export const StyleConfig: { [functionName: string]: Function} = {
         let style: StyleKeys = {position: "sticky", top: 0, overflow: "hidden", width: "100%"}
         let wrapperStyle: WrapperKeys = {}
 
-        let slideBy = 25; // dictates speed of slide
+        let slideBy = yFullView; // dictates speed of slide
 
 
-        // params.hold determines how long the slide should stay after sliding in
-        if (params.hold) {
+        // params.hold determines how long the slide should stay after sliding in        
+        if (typeof params.hold !== 'undefined') {
             wrapperStyle['height'] = "context" + (params.hold+1)    // tells slide to multiply context
         } else {
             wrapperStyle['height'] = "children" + 3     // assumes 100vh

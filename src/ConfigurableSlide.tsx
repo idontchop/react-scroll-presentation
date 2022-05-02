@@ -81,12 +81,13 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
      * @param h string
      */
     const convertHeight = (h?: string) => {
-        if (!h) return "100%"
+        let childrenHeightSum = findChildrenHeightSum(ref)
+        //if (!h) return `${childrenHeightSum}px` // no height set, use children sum
+        if (!h) return "auto"
         let [by,multiplier] = h.split(/(context|children)(\d)$/).filter(Boolean)
 
         if (['context','children'].includes(by)) {
 
-            let childrenHeightSum = findChildrenHeightSum(ref)
             return by === 'context' ? 
                 context.height ? `${context.height * parseInt(multiplier)}px` : "100%" :
                 ref.current ? `${childrenHeightSum * parseInt(multiplier)}px` : "100%"
@@ -197,7 +198,7 @@ const ConfigurableSlide = ( props: ConfigureableSlideProps ) => {
 
         let [wrapper,div] = buildStyles(props)
 
-        wrapper['height'] = wrapper.height ? convertHeight(wrapper.height) : "100%" 
+        wrapper['height'] = convertHeight(wrapper.height)
 
         let [childrenWrapper, childrenStyleDiv, childrenDivs] = buildChildrenStyles(props)
 
