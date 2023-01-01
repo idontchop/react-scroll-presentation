@@ -135,7 +135,7 @@ const Presentation = (props: any) => {
 
             return () => document.removeEventListener("scroll",onScroll)
 
-        } else if (presentationRef.current){
+        } else if (scrollRef?.current){
 
             const onScroll = (e:any) => {
                 setScrollTop(scrollRef.current.scrollTop)
