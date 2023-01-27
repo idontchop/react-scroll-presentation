@@ -51,7 +51,9 @@ export const HelloWorldLoaded = () => (
                 <div style={{display: 'flex', justifyContent: "center", flexDirection: "column", margin: 'auto'}}>
                 <p>Hello World</p>
                 <p>react-scroll-presentation</p>
-                <p>I can do this!</p>
+                <p>A good example story would be the everest picks that scroll through, then
+                    a tooltip box that can be alternately scrolled.
+                </p>
                 </div>
             </HelloWorld>
         </ConfigurableSlide>
@@ -59,9 +61,9 @@ export const HelloWorldLoaded = () => (
             <HelloWorldContent title="content" />
         </ConfigurableSlide>
         <ConfigurableSlide title="revealSlideIn" fadeOut={{hold: 2}}>
-            <RevealSlideIn1>
-            <HelloWorld small title="FirstBook" />
-            </RevealSlideIn1>
+            <HorizontalSlide title="Test Context Title">
+                <div>Test nested</div>
+            </HorizontalSlide>
             <RevealSlideIn2>
                 <HelloWorld small title="FirstBook2">
                     <p style={{margin: '20px'}}>2 Transition to me</p>
@@ -105,6 +107,11 @@ export const HelloWorldLoaded = () => (
                 scrollViewPort: true, scrollSpeed: 6, 
                 staticFirstChild: true, fullScreen: true}}>
             <HelloWorld title="FirstBook" />
+            <HorizontalSlide title="Test Context Title">
+                <HelloWorld title="FirstBook2">
+                    Test Nested
+                </HelloWorld>
+            </HorizontalSlide>
             <HelloWorld title="FirstBook2">
                 2 Transition to me
             </HelloWorld>

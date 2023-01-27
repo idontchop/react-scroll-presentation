@@ -144,7 +144,7 @@ const Presentation = (props: any) => {
 
             scrollRef.current.addEventListener("scroll", onScroll)
 
-            return () => scrollRef.current.addEventListener("scroll", onScroll)
+            return () => scrollRef?.current && scrollRef.current.removeEventListener("scroll", onScroll)
 
         }
 
