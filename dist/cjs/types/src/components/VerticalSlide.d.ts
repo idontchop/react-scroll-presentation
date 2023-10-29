@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import Slide from './Slide.type';
 /**
  * No settings necessary for slide through.
@@ -8,5 +8,5 @@ import Slide from './Slide.type';
  * @param props
  * @returns
  */
-declare const VerticalSlide: (props: Slide) => JSX.Element;
+declare const VerticalSlide: (props: Slide) => React.JSX.Element;
 export default VerticalSlide;

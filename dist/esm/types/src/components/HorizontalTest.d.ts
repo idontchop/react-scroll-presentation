@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import Slide from './Slide.type';
 /**
  * Used to test and develop ConfigurableSlide.
@@ -9,5 +9,5 @@ import Slide from './Slide.type';
  * @param props
  * @returns
  */
-declare const HorizontalTest: (props: Slide) => JSX.Element;
+declare const HorizontalTest: (props: Slide) => React.JSX.Element;
 export default HorizontalTest;

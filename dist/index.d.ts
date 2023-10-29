@@ -11,7 +11,7 @@ declare const HW: (props: {
     small?: boolean;
     title?: string;
     children?: JSX.Element | JSX.Element[] | string;
-}) => JSX.Element;
+}) => React.JSX.Element;
 
 declare const PresentationContext: React.Context<{
     current: string;
@@ -34,7 +34,7 @@ declare const PresentationContext: React.Context<{
  * @param {*} props
  * @returns
  */
-declare const Presentation: (props: any) => JSX.Element;
+declare const Presentation: (props: any) => React.JSX.Element;
 
 interface Slide {
     title?: string;
@@ -69,6 +69,6 @@ interface ConfigureableSlideProps {
  *  1) Appear and fade out - For welcome screen. Will show full screen and fade out when
  * scrolled through.
  */
-declare const ConfigurableSlide: (props: ConfigureableSlideProps) => JSX.Element;
+declare const ConfigurableSlide: (props: ConfigureableSlideProps) => React.JSX.Element;
 
 export { ConfigurableSlide, HW as HelloWorld, Presentation, PresentationContext };

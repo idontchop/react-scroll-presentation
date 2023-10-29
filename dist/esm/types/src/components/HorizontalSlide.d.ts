@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import Slide from './Slide.type';
 /**
  * Passes configuration to ConfigurableSlide to scroll slide in from side on scroll
@@ -7,5 +7,5 @@ import Slide from './Slide.type';
  * @param props
  * @returns
  */
-declare const HorizontalSlide: (props: Slide) => JSX.Element;
+declare const HorizontalSlide: (props: Slide) => React.JSX.Element;
 export default HorizontalSlide;

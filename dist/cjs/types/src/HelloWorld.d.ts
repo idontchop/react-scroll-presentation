@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 /**
  * Test presentation slide
  *
@@ -9,5 +9,5 @@ declare const HW: (props: {
     small?: boolean;
     title?: string;
     children?: JSX.Element | JSX.Element[] | string;
-}) => JSX.Element;
+}) => React.JSX.Element;
 export default HW;

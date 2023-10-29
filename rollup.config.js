@@ -4,6 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import json from "@rollup/plugin-json";
 
 import packageJson from "./package.json" assert { type: "json" };
 
@@ -26,6 +27,7 @@ export default [
             peerDepsExternal(),
             resolve(),
             commonjs( {include: /node__modules/ }),
+            json(),
             terser(),
             typescript({ sourceMap: true, tsconfig: "./tsconfig.json" })
         ],

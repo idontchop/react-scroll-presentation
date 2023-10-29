@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
+import pjson from '../../package.json';
 
 const PresentationDiv = styled.div<{fullScreen?: boolean}>`
     overflow: clip;
@@ -215,7 +216,7 @@ const Presentation = (props: any) => {
     }, [childClones,scrollTop])
 
     useEffect( () => {
-        let pjson = require('../../package.json')
+        
         console.log("DEVELOPMENT: ", "react-scroll-presentation", pjson.version)
         console.log(presentationRef.current.children)
         console.log(props.children,React.isValidElement(props.children[0]) );

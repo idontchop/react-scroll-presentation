@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 /**
  * Test Presentation slide.
  *
@@ -7,5 +7,5 @@
  */
 declare const HWC: (props: {
     title: string;
-}) => JSX.Element;
+}) => React.JSX.Element;
 export default HWC;

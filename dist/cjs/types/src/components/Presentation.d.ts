@@ -20,5 +20,5 @@ export declare const PresentationContext: React.Context<{
  * @param {*} props
  * @returns
  */
-declare const Presentation: (props: any) => JSX.Element;
+declare const Presentation: (props: any) => React.JSX.Element;
 export default Presentation;
