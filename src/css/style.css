@@ -1,0 +1,17 @@
+.react-scroll-presentation {
+    overflow: clip;
+}
+
+.react-scroll-presentation-scroll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.react-scroll-presentation-sticky {
+    display: block;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
+    position: -ms-sticky;
+    position: sticky;
+}

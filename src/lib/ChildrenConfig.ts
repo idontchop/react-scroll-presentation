@@ -68,7 +68,7 @@ const buildStylesFromParams = (y: number, yFullView: number, params: Params) => 
         styles.backgroundRepeat = 'no-repeat'
     } 
     
-    if (params.fullScreen) {
+    if (params.fullscreen) {
         styles.height = "100vh"
         styles.width = "100%"
 

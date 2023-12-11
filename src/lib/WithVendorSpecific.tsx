@@ -50,14 +50,16 @@ export const WithVendorSpecific = (Element: JSX.Element) => {
 
 
     /* won't work, causes rerender, just want to change the styles and class
-     * need to build a single reusable class
+     * need to build a single reusable class, huh?
      */
+
+    const stickyClass = 'react-scroll-presentation-sticky';
 
     if (Element.props?.style?.position && Element.props.style.position === 'sticky') {
         
         let {position, ...newStyles} = Element.props.style
         // anti pattern? 
-        let newClassNames = Element.props.className ? 'sticky ' + Element.props.className : 'sticky'
+        let newClassNames = Element.props.className ? `${stickyClass} ` + Element.props.className : stickyClass
         const newElement:any = React.cloneElement(Element,{
             style: newStyles,
             className: newClassNames

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled,{keyframes} from 'styled-components'
 
-
+import { usePresentation } from '../'
 import HelloWorld from '../HelloWorld'
 import HelloWorldContent from '../HelloWorldContent'
 import Presentation from '../components/Presentation'
@@ -39,17 +39,21 @@ const RevealSlideIn4 = styled.div`
     animation: ${slideInRight} 1.4s 1;
 `
 
-let header = <div style={{width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
+const TransitionHeader = () => {
+    let { current } = usePresentation();
+    if (current === 'header') current = "";
+    return <div style={{width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>{current}</h1></div>
+}
 
-export const HelloWorldLoaded = () => (
-    <Presentation fullScreen>
+export const HelloWorldLoaded = (args: any) => (
+    <Presentation {...args} style={{height: !args.fullscreen ? '400px' : null}}>
         <ConfigurableSlide title="header" header>
-            <div style={{margin: 0, width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
+            <TransitionHeader />
         </ConfigurableSlide>
-        <ConfigurableSlide transition={
+        <ConfigurableSlide title='First' transition={
                 {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
                 scrollViewPort: true, scrollSpeed: 6, 
-                staticFirstChild: true, fullScreen: true}}>
+                staticFirstChild: true, fullscreen: true}}>
             <HelloWorld title="FirstBook" />
             <HorizontalSlide title="Test Context Title">
                 <HelloWorld title="FirstBook2">
@@ -66,10 +70,10 @@ export const HelloWorldLoaded = () => (
                 4 Transition to me
             </HelloWorld>
         </ConfigurableSlide>
-        <ConfigurableSlide transition={
+        <ConfigurableSlide title='Final' transition={
                 {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
                 scrollViewPort: true, scrollSpeed: 6, 
-                staticFirstChild: true, fullScreen: true}}>
+                staticFirstChild: true, fullscreen: true}}>
             <HelloWorld title="FirstBook" />
             <HorizontalSlide title="Test Context Title">
                 <HelloWorld title="FirstBook2">
@@ -89,3 +93,7 @@ export const HelloWorldLoaded = () => (
       
     </Presentation>
 )
+
+HelloWorldLoaded.args = {
+    fullscreen: true
+}

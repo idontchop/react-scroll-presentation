@@ -42,7 +42,7 @@ const RevealSlideIn4 = styled.div`
 let header = <div style={{width: "100%", backgroundColor: "white", textAlign: "center"}}><h1>Final</h1></div>
 
 export const HelloWorldLoaded = () => (
-    <Presentation fullScreen>
+    <Presentation fullscreen>
 
 
 
@@ -86,7 +86,7 @@ export const HelloWorldLoaded = () => (
         <ConfigurableSlide alternateSlideIn={
                 {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
                 scrollViewPort: true, scrollSpeed: 4, 
-                fullScreen: true}}>
+                fullscreen: true}}>
             <HelloWorld small title="FirstBook" />
             <HelloWorld small title="FirstBook2">
                 <p style={{margin: '20px'}}>2 Transition to me</p>
@@ -105,7 +105,7 @@ export const HelloWorldLoaded = () => (
         <ConfigurableSlide transition={
                 {background: 'https://www.idontchop.com/wp-content/uploads/2020/11/tshirt-lineup-1.jpg',
                 scrollViewPort: true, scrollSpeed: 6, 
-                staticFirstChild: true, fullScreen: true}}>
+                staticFirstChild: true, fullscreen: true}}>
             <HelloWorld title="FirstBook" />
             <HorizontalSlide title="Test Context Title">
                 <HelloWorld title="FirstBook2">

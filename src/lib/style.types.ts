@@ -48,7 +48,7 @@ export interface Params {
     [key: string]: any,
     numChildren: number,
     background?: string,
-    fullScreen?: boolean,
+    fullscreen?: boolean,
     scrollViewPort?: boolean,  // true to adust scrollable area by viewport
     scrollSpeed?: number,      // How much to mulitply scrollable area, default 1
     toEnd?: boolean,           // transition should last to end of scroll

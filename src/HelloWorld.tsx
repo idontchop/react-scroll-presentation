@@ -14,8 +14,7 @@ const HW = (props: { small?: boolean, title?: string, children?: JSX.Element | J
     const context = React.useContext(PresentationContext)
 
     const [scrollPos, setScrollPos] = useState(0)
-    window.addEventListener('scroll', (event) => {
-        
+        window.addEventListener('scroll', (event) => {        
     })
 
     const scrollTo = (index: number) => {
@@ -28,8 +27,10 @@ const HW = (props: { small?: boolean, title?: string, children?: JSX.Element | J
             setScrollPos(bigHelloWorld.current.scrollTop)
         }
     },[])
+
+    let height = context.viewRef?.clientHeight ?? context.viewRef?.innerHeight ?? '100vh';
     
-    return <div style={{height: props.small ? '100px' : '100vh', display: "flex", flexDirection: "column", justifyContent: "center"}}>
+    return <div style={{height, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                     {/*<button onClick={() => scrollTo(0)}>Scroll to 0</button>
                     <button onClick={() => context.setScrollToSlide(1)}>Scroll to 1</button>*/}
             <p>{props.title ? props.title :
