@@ -30,12 +30,12 @@ const Presentation = (props: any) => {
 
     const [scrollableHeight, setScrollableHeight] = useState(0)
     const childrenRefs = useRef(new Array())
-    const presentationRef:any = useRef()
-    const scrollRef:any = useRef()
+    const presentationRef = useRef<HTMLDivElement>(null)
+    const scrollRef = useRef<HTMLDivElement>(null)
     const [scrollTop, setScrollTop] = useState(-1)
     const [scrolling, setScrolling] = useState(false)
     const [childClones, setChildClones] = useState([])
-    const [childStartMap, setChildStartMap] = useState([])  // Contains the start of scroll
+    const [childStartMap, setChildStartMap] = useState<number[]>([])  // Contains the start of scroll
                                                             // for each child from main scroll
     const [currentSlide, setCurrentSlide] = useState("")    // = props.childen[x].title or x
 
@@ -46,12 +46,15 @@ const Presentation = (props: any) => {
             (index >= childStartMap.length) ? childStartMap.length - 1 :
             index;
 
-        let scrollToOptions = {left: 0, top: childStartMap[index],
-             behavior: "auto"}
+        const scrollToOptions: ScrollToOptions = {
+            left: 0,
+            top: childStartMap[index],
+            behavior: "auto"
+        }
         if (props.fullScreen) {
             //window.scrollTo(scrollToOptions)  // wtf
             window.scrollTo(0, childStartMap[index])
-        } else {
+        } else if (scrollRef.current) {
             scrollRef.current.scrollTo(scrollToOptions)
         }
     }
@@ -118,16 +121,17 @@ const Presentation = (props: any) => {
 
             return () => document.removeEventListener("scroll",onScroll)
 
-        } else if (presentationRef.current){
+        } else if (presentationRef.current && scrollRef.current) {
+            const scrollElement = scrollRef.current
 
-            const onScroll = (e:any) => {
-                setScrollTop(scrollRef.current.scrollTop)
-                setScrolling(scrollRef.current.scrollY !== scrollTop)
+            const onScroll = () => {
+                setScrollTop(scrollElement.scrollTop)
+                setScrolling(scrollElement.scrollTop !== scrollTop)
             }
 
-            scrollRef.current.addEventListener("scroll", onScroll)
+            scrollElement.addEventListener("scroll", onScroll)
 
-            return () => scrollRef.current.addEventListener("scroll", onScroll)
+            return () => scrollElement.removeEventListener("scroll", onScroll)
 
         }
 
@@ -180,7 +184,7 @@ const Presentation = (props: any) => {
         if (presentationRef.current?.children.length) {
             let scrollHeight = 0
             for (let i = 0; i < presentationRef.current.children.length; i++) {
-                let childHeight = presentationRef.current.children.item(i).scrollHeight
+                let childHeight = presentationRef.current.children.item(i)?.scrollHeight ?? 0
                 scrollHeight += childHeight
                 if (i < presentationRef.current.children.length - 1) {
                     startMap[i+1] = i===0 ? childHeight : startMap[i] + childHeight
@@ -196,13 +200,6 @@ const Presentation = (props: any) => {
             
         }
     }, [childClones,scrollTop])
-
-    useEffect( () => {
-        let pjson = require('../../package.json')
-        console.log("DEVELOPMENT: ", "react-scroll-presentation", pjson.version)
-        console.log(presentationRef.current.children)
-        console.log(props.children,React.isValidElement(props.children[0]), props.children[0].props );
-    },[])
 
     if (props.fullScreen) {
         // fullScreen from props makes Presentation function as if full screen in view port
@@ -225,9 +222,8 @@ const Presentation = (props: any) => {
                         scroll: scrollTop, 
                         setScrollToSlide: (s) => setScrollToSlide(s),
                         current: currentSlide,
-                        scrollHeight: scrollableHeight - 
-                            scrollRef.current ? scrollRef.current.clientHeight : 0,
-                        height: scrollRef.current ? scrollRef.current.clientHeight : 0}}>
+                        scrollHeight: scrollableHeight - (scrollRef.current?.clientHeight ?? 0),
+                        height: scrollRef.current?.clientHeight ?? 0}}>
                         {childClones}
                 </PresentationContext.Provider>
             </PresentationDiv>
