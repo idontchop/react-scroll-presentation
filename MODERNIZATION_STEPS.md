@@ -7,6 +7,10 @@ Analysis date: 2026-11-17.
 React, Vue and Angular packages become thin connectors (tag typings and one small helper each). Phase 5 describes
 the core, and [examples/vanilla](examples/vanilla) is its first acceptance test.
 
+**Package names.** Users install the package for their framework: `react-scroll-presentation`,
+`ng-scroll-presentation` or `vue-scroll-presentation`. Each one depends on the core, `@scroll-presentation/core`,
+which only plain-JavaScript users install directly.
+
 Because of that, the current React components in `src/` are not modernized in place. Phase 2 lists their problems
 so the core avoids them, and the later phases target the core.
 
@@ -195,18 +199,19 @@ written this way. It fails until the core exists, and Phase 4 turns it into the 
    package.json            private root: "workspaces": ["packages/*"], shared dev tools
    tsconfig.base.json      shared compiler options; each package extends it
    packages/
-     core/                 @<scope>/core     elements, stylesheet, no framework deps
-     react/                @<scope>/react    peerDeps: react, react-dom, @<scope>/core
-     vue/                  @<scope>/vue      peerDeps: vue, @<scope>/core
-     angular/              @<scope>/angular  peerDeps: @angular/core, @<scope>/core
+     core/                 @scroll-presentation/core  elements, stylesheet, no framework deps
+     react/                react-scroll-presentation  peerDeps: react, react-dom
+     vue/                  vue-scroll-presentation    peerDeps: vue
+     angular/              ng-scroll-presentation     peerDeps: @angular/core
    examples/               playgrounds per framework, plus vanilla (private, not published)
    ```
 
    - **Build `core` first.** It's new code, so start it in `packages/core` test-first. Leave the current `src/`
      running the React playground until the React connector replaces it, then delete it.
    - **Keep dependency direction one way.** Connectors depend on `core`; `core` never imports a connector or a
-     framework, and connectors never import each other. List the framework and `core` as `peerDependencies`
-     (plus `devDependencies` for local builds), so an app gets a single copy of each.
+     framework, and connectors never import each other. Each connector lists `@scroll-presentation/core` as a
+     regular `dependency`, so installing `react-scroll-presentation` alone is enough, and lists its framework as a
+     `peerDependency`, so the app supplies one copy.
    - **Build each package with its own ecosystem's tools.**
      - `core` and `react`: Rollup (the esbuild + dts setup already in this repo), emitting ESM, CJS and `.d.ts`.
        `core` also ships `styles.css`.
@@ -243,9 +248,10 @@ written this way. It fails until the core exists, and Phase 4 turns it into the 
 Goal: publish every package from GitHub Actions. Nothing is published from a developer machine, and the build
 output is never committed. As of 2026-11-17, the name `react-scroll-presentation` is not taken on npm.
 
-1. **Claim the names.** Decide on an npm scope for the Phase 5 packages (for example `@<scope>/core`, `/react`,
-   `/vue`, `/angular`); the examples use `@scroll-presentation/core` as a placeholder. Keep
-   `react-scroll-presentation` for the React connector or as an alias. Enable 2FA on the npm account.
+1. **Claim the names.** As of 2026-11-19 all of these are free on npm: `react-scroll-presentation`,
+   `ng-scroll-presentation`, `vue-scroll-presentation` and `@scroll-presentation/core`. Create the
+   `scroll-presentation` npm organization for the scope, and publish placeholder versions early to hold the
+   names. Enable 2FA on the npm account.
 2. **Make the packages publishable.** In each `package.json`:
    - fix `peerDependences` → `peerDependencies`;
    - add an `exports` map (ESM, CJS, types and the stylesheet);
