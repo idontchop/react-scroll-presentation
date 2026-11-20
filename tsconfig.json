@@ -31,7 +31,7 @@
     // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like `./node_modules/@types`. */
-    "types": ["node", "jest"],                         /* Include globals used by library source and tests. */
+    "types": ["node"],                                 /* Include Node globals used by library source. */
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     // "resolveJsonModule": true,                        /* Enable importing .json files */
     // "noResolve": true,                                /* Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project. */
@@ -101,6 +101,7 @@
   "exclude": [
     "dist",
     "node_modules",
+    "examples",
     "src/**/*.test.tsx",
     "src/**/*.stories.tsx"
   ]

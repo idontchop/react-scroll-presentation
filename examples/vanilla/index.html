@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scroll-presentation · vanilla JS example</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Same slides as examples/react, using the planned <scroll-presentation> / <scroll-slide> elements.
+         Slides are identified by `name` rather than `title`, which would show a browser tooltip. -->
+    <scroll-presentation full-screen>
+
+      <scroll-slide name="Intro" effect="fade-out">
+        <section class="panel">
+          <p class="eyebrow">Vanilla JS</p>
+          <h1>react-scroll-presentation</h1>
+          <p class="lead">The same presentation with no framework: plain HTML, one stylesheet and a small script.
+            Scroll to try each effect, or jump with the header that appears below.</p>
+        </section>
+      </scroll-slide>
+
+      <scroll-slide name="How it works" effect="fade-out" hold="2">
+        <div class="reveal reveal-left" style="animation-duration: 0.8s">
+          <div class="card">
+            <span class="step">1</span>
+            <div><h3>Load the core</h3><p>Import the script and stylesheet, then call defineElements().</p></div>
+          </div>
+        </div>
+        <div class="reveal reveal-right" style="animation-duration: 1s">
+          <div class="card">
+            <span class="step">2</span>
+            <div><h3>Pick an effect</h3><p>Give each &lt;scroll-slide&gt; an effect such as fade-out, slide-in or transition.</p></div>
+          </div>
+        </div>
+        <div class="reveal reveal-left" style="animation-duration: 1.2s">
+          <div class="card">
+            <span class="step">3</span>
+            <div><h3>Write plain HTML</h3><p>Slides contain any markup; no framework is required.</p></div>
+          </div>
+        </div>
+        <div class="reveal reveal-right" style="animation-duration: 1.4s">
+          <div class="card">
+            <span class="step">4</span>
+            <div><h3>Scroll</h3><p>The presentation advances as the reader scrolls.</p></div>
+          </div>
+        </div>
+      </scroll-slide>
+
+      <scroll-slide name="Header" effect="header">
+        <nav class="nav">
+          <strong class="brand">⚛ react-scroll-presentation</strong>
+          <div class="jump">
+            <button type="button" data-slide="Intro">Intro</button>
+            <button type="button" data-slide="How it works">How it works</button>
+            <button type="button" data-slide="Slide in">Slide in</button>
+            <button type="button" data-slide="Transition">Transition</button>
+            <button type="button" data-slide="Features">Features</button>
+            <button type="button" data-slide="Get started">Get started</button>
+          </div>
+          <span class="source">library: vanilla core</span>
+        </nav>
+      </scroll-slide>
+
+      <scroll-slide name="Alternate" effect="alternate-slide-in" scroll-viewport scroll-speed="4" full-screen>
+        <div class="card">
+          <span class="step">A</span>
+          <div><h3>alternate-slide-in</h3><p>Each child slides in on its own as you scroll.</p></div>
+        </div>
+        <div class="card">
+          <span class="step">B</span>
+          <div><h3>scroll-speed</h3><p>Sets how far the reader scrolls for each child.</p></div>
+        </div>
+        <div class="card">
+          <span class="step">C</span>
+          <div><h3>scroll-viewport</h3><p>Measures that distance in screen heights.</p></div>
+        </div>
+        <div class="card">
+          <span class="step">D</span>
+          <div><h3>full-screen</h3><p>Makes the group fill the viewport.</p></div>
+        </div>
+      </scroll-slide>
+
+      <scroll-slide name="Slide in" effect="slide-in">
+        <section class="panel">
+          <p class="eyebrow">slide-in</p>
+          <h1>Content slides in from the side</h1>
+        </section>
+      </scroll-slide>
+
+      <scroll-slide name="Transition" effect="transition" scroll-viewport scroll-speed="6" static-first-child full-screen>
+        <section class="panel stage">
+          <p class="eyebrow">transition · 1 of 4</p><h1>One spot, several scenes</h1>
+        </section>
+        <section class="panel stage alt-1">
+          <p class="eyebrow">transition · 2 of 4</p><h1>Children cross-fade</h1>
+        </section>
+        <section class="panel stage alt-2">
+          <p class="eyebrow">transition · 3 of 4</p><h1>Driven by scroll position</h1>
+        </section>
+        <section class="panel stage">
+          <p class="eyebrow">transition · 4 of 4</p><h1>No timers involved</h1>
+        </section>
+      </scroll-slide>
+
+      <scroll-slide name="Features">
+        <section class="panel tall">
+          <p class="eyebrow">No effect</p>
+          <h1>A plain slide scrolls normally</h1>
+          <div class="grid">
+            <div class="feature"><h3>Fade out</h3><p>A slide stays pinned and fades as the next one scrolls in.</p></div>
+            <div class="feature"><h3>Slide in</h3><p>Content slides in from the side as it enters the view.</p></div>
+            <div class="feature"><h3>Transitions</h3><p>Several children cross-fade in one place while scrolling.</p></div>
+            <div class="feature"><h3>Sticky header</h3><p>A header stays visible over the slides below it.</p></div>
+            <div class="feature"><h3>Slide events</h3><p>Listen for slidechange, or jump to a slide by name.</p></div>
+            <div class="feature"><h3>Your styling</h3><p>Plain CSS classes and inline styles work inside any slide.</p></div>
+          </div>
+        </section>
+      </scroll-slide>
+
+      <scroll-slide name="Slide me left" effect="slide-me">
+        <div class="strip">slide-me from the left →</div>
+      </scroll-slide>
+      <scroll-slide name="Slide me right" effect="slide-me" right>
+        <div class="strip right">← slide-me from the right</div>
+      </scroll-slide>
+
+      <scroll-slide name="Get started" effect="fade-out">
+        <section class="panel">
+          <p class="eyebrow">Get started</p>
+          <h1>Edit examples/vanilla/index.html</h1>
+          <p class="lead">This page is the target for the vanilla core: it should work once the core is implemented.</p>
+        </section>
+      </scroll-slide>
+
+    </scroll-presentation>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

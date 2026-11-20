@@ -12,7 +12,10 @@
     "test": "vitest run",
     "build": "rollup -c",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "playground": "vite examples/react",
+    "playground:dist": "npm run build && vite examples/react --mode dist",
+    "playground:vanilla": "vite examples/vanilla"
   },
   "author": "Nathan Dunn",
   "license": "MIT",
@@ -29,9 +32,12 @@
     "@storybook/react-vite": "^10.6.7",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.12",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/styled-components": "^5.1.36",
     "@typescript/typescript6": "^6.0.2",
+    "@vitejs/plugin-react": "^6.3.0",
     "@vitest/browser-playwright": "latest",
     "@vitest/coverage-v8": "latest",
     "babel-loader": "^10.1.1",
@@ -46,6 +52,7 @@
     "storybook": "^10.6.7",
     "styled-components": "^6.6.0",
     "typescript": "~7.0.2",
+    "vite": "^8.3.8",
     "vitest": "latest"
   },
   "peerDependences": {

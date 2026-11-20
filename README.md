@@ -35,5 +35,15 @@ Controls all slide presentations by supplying props.
 
 Coming Soon.
 
+## Development
+
+    npm run playground        # standalone app at examples/react, using the library source
+    npm run playground:dist   # builds the library, then runs the app against dist/
+    npm run playground:vanilla  # plain HTML + JS target for the planned framework-free core (fails until it exists)
+    npm run storybook         # component stories
+
+The playground is a small Vite app that imports `react-scroll-presentation` like a real app would. Edit
+`examples/react/src/App.tsx` to try changes in a browser.
+
 ## Contributors
 Seeking Contributors.
